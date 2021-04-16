@@ -4,14 +4,15 @@
   align-items: center;
   justify-content: space-between;
   height: 100px;
-  padding: 0px 50px;
+  padding: 50px;
   color: rgb(228, 227, 225);
-  border-top: 1px solid rgb(51, 51, 51);
+  border-top: 1px solid rgb(14, 14, 14);
 }
 .footer-links {
   display: flex;
   align-items: center;
 }
+
 .footer-links a {
   color: white;
   opacity: 0.15;
@@ -40,4 +41,8 @@
 
 .footer-container {
   margin-top: 30px;
+}
+
+h6 {
+  font-weight: bolder;
 }
