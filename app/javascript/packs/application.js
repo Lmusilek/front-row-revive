@@ -61,24 +61,31 @@ const initUpdateNavbarOnScroll = () => {
 document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
 
-  initSelect2();
-  initFlatpickr();
+  // Secect2
+    initSelect2();
+
+  // Flatpickr
+    initFlatpickr();
+
+  // Navbar Scroll
+    initUpdateNavbarOnScroll();
+     if (document.getElementById("event-start-time")) {
+
+      countdownTimer();
+     }
+       initChatroomCable();
+
+       $('#form-field').on('keypress', e => {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
 
 
-
-  initUpdateNavbarOnScroll();
-   if (document.getElementById("event-start-time")) {
-
-    countdownTimer();
-   }
-   initChatroomCable();
-
-   $('#form-field').on('keypress', e => {
-    if (e.keyCode == 13) {
-        return false;
-    }
+// end of turbolinks
 });
-});
+
+
 
 require("trix")
 require("@rails/actiontext")
