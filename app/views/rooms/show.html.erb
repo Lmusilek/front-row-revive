@@ -1,64 +1,31 @@
-<div class="container">
-      <div class="row justify-content-center">
-        <div class="col-8">
-          <% if @room.event.start_time > Time.now %>
-            <div class="showtime">
-              <input value="<%= @room.event.start_time%>" type="hidden" id="event-start-time" />
-              <h1>This stream starts in <strong><span id="counter"></span></strong></h1>
-            </div>
-          <% else %>
-          <% if @room.event.user == current_user %>
-           <p id="live-button">LIVE NOW</p>
-            <div id="videos"
-                data-controller="vonage"
-                data-vonage-api-key="<%= ENV["VONAGE_API_KEY"] %>"
-                data-vonage-session-id= "<%= @room.vonage_session_id %>"
-                data-vonage-token="<%= @token %>"
-                data-vonage-name="<%= current_user.first_name %>">
-           
-              </div>
-            <% elsif %>
-             <p id="live-button">LIVE NOW</p>
-              <div id="videos"
-                data-controller="vonageVisitor"
-                data-vonageVisitor-api-key="<%= ENV["VONAGE_API_KEY"] %>"
-                data-vonageVisitor-session-id= "<%= @room.vonage_session_id %>"
-                data-vonageVisitor-token="<%= @token %>"
-                data-vonageVisitor-name="<%= current_user.first_name %>">
-              </div>
-          <% end %>
+<div class="d-flex justify-content-between">
+    <div class="col-8 ml-3">
+        <% @room.event.user == current_user %>
+        <iframe width="960" height="600" src="https://www.youtube.com/embed/Y39g8TGp-I8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-          <% end %>
-        </div>
-        <div class="col-4">
-          <h3 id="live-title">Live Chat<%= @room.chatroom.name %></h3>
-          <div id="messages" class="messages-container" data-chatroom-id="<%= @room.chatroom.id %>">
-            <% @room.chatroom.messages.each do |message| %>
-              <div class="message-container" id="message-<%= message.id %>">
-                <i class="author">
-                  <span><%= message.user.first_name %></span>
-                  <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-                </i>
-                <p><%= message.content %></p>
-              </div>
-            <% end %>
-          </div>
-          <%= simple_form_for [ @room.chatroom, @message ], remote: true, authenticity_token: true do |f| %>
-            <%= f.input :content, label: false, placeholder: "Type your Message here#{@room.chatroom.name}", input_html: { id: "something" } %>
-          <% end %>
-        </div>
-      </div>
     </div>
 
-    <script type="text/javascript">
-  (function() {
-    var blinks = document.getElementById('#live-button');
-    var visibility = 'hidden';
-    window.setInterval(function() {
-      for (var i = blinks.length - 1; i >= 0; i--) {
-        blinks[i].style.visibility = visibility;
-      }
-      visibility = (visibility === 'visible') ? 'hidden' : 'visible';
-    }, 250);
-  })();
-</script>
+
+
+    <!-------- LIVE CHAT ------->
+
+    <div class="col-4">
+        <h3 id="live-title">Live Chat<%= @room.chatroom.name %></h3>
+        <div id="messages" class="messages-container" data-chatroom-id="<%= @room.chatroom.id %>">
+            <% @room.chatroom.messages.each do |message| %>
+            <div class="message-container" id="message-<%= message.id %>">
+                <i class="author">
+                    <span><%= message.user.first_name %></span>
+                    <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+                </i>
+                <p><%= message.content %></p>
+            </div>
+            <% end %>
+        </div>
+        <div>
+            <%= simple_form_for [ @room.chatroom, @message ], remote: true, authenticity_token: true do |f| %>
+            <%= f.input :content, label: false, placeholder: "Type your Message here#{@room.chatroom.name}", input_html: { id: "livechat-input" } %>
+            <% end %>
+        </div>
+    </div>
+</div>

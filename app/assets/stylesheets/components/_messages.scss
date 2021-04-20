@@ -1,12 +1,18 @@
 // WHOLE CHAT CONTAINER
 .messages-container {
-  // width: 350px;
-  height: 410px;
+  width: 400px;
+  height: 480px;
   overflow-y: scroll;
   border: 2px solid #4e4e4e;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+
   background-color: #131313e7;
-  // right: 80px;
+}
+
+#messages {
+  margin-right: 20px;
 }
 
 // MESSAGE SENT BY USER NAME AND DATE
@@ -27,42 +33,46 @@
   color: #672af9;
   border-bottom: 1px solid #1f1f1f;
 }
-// .container-flex{
-//   display: flex;
-// }
 
-#something {
-  margin-top: 10px;
+#livechat-input {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 400px;
   background-color: #3d3d3de7;
-  border: 1px solid #672af9;
+  border-left: 1px solid #672af9;
+  border-right: 1px solid #672af9;
+  border-bottom: 1px solid #672af9;
+  border-bottom-left-radius: 5px;
   // width: 350px;
   color: white;
+  margin-top: -5px;
 }
 
 #live-title {
-  margin-top: 15px;
+  margin-top: 50px;
+  font-weight: bold;
 }
 
 // STREAMING VIDEO STYLES
 
-#videos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  // gap: 1rem;
-}
+// #videos {
+//   display: grid;
+//   grid-template-columns: repeat(3, minmax(0, 1fr));
+//   // gap: 1rem;
+// }
 
-.OT_root {
-  height: 550px !important;
-}
+// .OT_root {
+//   height: 550px !important;
+// }
 
-.OT_publisher .OT_video-element {
-  padding: 20px;
-}
+// .OT_publisher .OT_video-element {
+//   padding: 20px;
+// }
 
-.showtime {
-  font-weight: bold;
-  margin: 200px;
-}
+// .showtime {
+//   font-weight: bold;
+//   margin: 200px;
+// }
 
 #live-button {
   position: absolute;

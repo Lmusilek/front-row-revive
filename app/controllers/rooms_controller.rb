@@ -22,8 +22,8 @@ class RoomsController < ApplicationController
       #   flash[:alert] = "You are not authorised to view that stream"
       #   redirect_to root_path
       # end
-      opentok = OpenTok::OpenTok.new ENV["VONAGE_API_KEY"], ENV["VONAGE_API_SECRET"]
-      @token = opentok.generate_token @room.vonage_session_id, { name: current_user.first_name }
+      # opentok = OpenTok::OpenTok.new ENV["VONAGE_API_KEY"], ENV["VONAGE_API_SECRET"]
+      # @token = opentok.generate_token @room.vonage_session_id, { name: current_user.first_name }
    end
 
   def rooms_params
