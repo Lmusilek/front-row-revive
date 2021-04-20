@@ -4,9 +4,11 @@ const message = document.getElementById("livechat-input");
 const initChatroomCable = () => {
   const messagesContainer = document.getElementById("messages");
   // When entering Room chat goes straight to bottom
-  messagesContainer.scrollTop =
-    messagesContainer.scrollHeight - messagesContainer.clientHeight;
-
+  const scrollChat = () => {
+    messagesContainer.scrollTop =
+      messagesContainer.scrollHeight - messagesContainer.clientHeight;
+  };
+  scrollChat();
   if (messagesContainer) {
     const id = messagesContainer.dataset.chatroomId;
 
@@ -26,8 +28,7 @@ const initChatroomCable = () => {
   message.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
       message.value = "";
-      messagesContainer.scrollTop =
-        messagesContainer.scrollHeight - messagesContainer.clientHeight;
+      scrollChat();
     }
   });
 };
