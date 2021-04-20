@@ -26,6 +26,20 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
+
+    #Funding
+    # Funding
+    # if sales =< funding both == 100
+    # add copy to the show page saying "show has reached target bla bla"
+
+    @funding = @event.funding
+    @sales = Order.where(event_id: @event).count
+    @percent_text = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    if @sales >= @funding
+      @percent_bar = 100
+    else
+      @percent_bar = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    end
   end
 
   # CREATE
