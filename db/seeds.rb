@@ -183,7 +183,7 @@ artists.each do |artist|
       end_time: DateTime.new(2021,6,20,9),
       city: Faker::Address.city,
       country: country_arr.sample,
-      funding: rand(1..1000)
+      funding: rand(1..1000),
       user: artist
       )
     file = URI.open(event_img_arr.sample)
