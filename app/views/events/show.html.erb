@@ -59,7 +59,26 @@
     <%= submit_tag 'Buy Ticket', class: 'btn btn-primary' %>
     <% end %>
  <% end %>
-
 </div>
+
+    <div class="col-xl-3 col-lg-6 mb-4">
+      <div class="rounded-lg p-5">
+        <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
+
+        <!-- Progress bar 1 -->
+        <div class="progress mx-auto" data-value='<%= @percent_bar %>'>
+          <span class="progress-left">
+                        <span class="progress-bar border-primary"></span>
+          </span>
+          <span class="progress-right">
+                        <span class="progress-bar border-primary"></span>
+          </span>
+          <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+            <div class="h2 font-weight-bold"><%= @percent_text %><sup class="small">%</sup></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
 </div>
