@@ -23,6 +23,7 @@ class Event < ApplicationRecord
   validates :end_time, presence: true
   validates :city, presence: true
   validates :country, presence: true
+  validates :funding, presence: true
   # STRIPE
   monetize :price_cents
 
