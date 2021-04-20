@@ -25,12 +25,9 @@ class EventsController < ApplicationController
   # SHOW
   def show
     @event = Event.find(params[:id])
-    UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
 
-    #Funding
-    # Funding
-    # if sales =< funding both == 100
-    # add copy to the show page saying "show has reached target bla bla"
+    # User IP tracker - switched off due to certificate error
+    # UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
 
     @funding = @event.funding
     @sales = Order.where(event_id: @event).count
