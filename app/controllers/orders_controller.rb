@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         name: event.sku,
+        mode: 'setup',
         images: [event.photo],
         amount: event.price_cents,
         currency: 'gbp',

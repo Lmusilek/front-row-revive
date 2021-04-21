@@ -56,8 +56,7 @@ document.addEventListener("turbolinks:load", () => {
   // Call your JS functions here
 
   // Secect2
-    initSelect2();
-
+  initSelect2();
 
   initUpdateNavbarOnScroll();
   if (document.getElementById("event-start-time")) {
@@ -70,46 +69,46 @@ document.addEventListener("turbolinks:load", () => {
       return false;
     }
   });
-});
-
   // Flatpickr
-    initFlatpickr();
+  initFlatpickr();
 
   // Navbar Scroll
-    initUpdateNavbarOnScroll();
-     if (document.getElementById("event-start-time")) {
+  initUpdateNavbarOnScroll();
+  if (document.getElementById("event-start-time")) {
+    countdownTimer();
+  }
 
-      countdownTimer();
-     }
-       initChatroomCable();
-
-       $('#form-field').on('keypress', e => {
-        if (e.keyCode == 13) {
-            return false;
-        }
-    });
+  $("#form-field").on("keypress", (e) => {
+    if (e.keyCode == 13) {
+      return false;
+    }
+  });
 
   // Progress Bar start
-    $(function() {
-    $(".progress").each(function() {
-
-      var value = $(this).attr('data-value');
-      var left = $(this).find('.progress-left .progress-bar');
-      var right = $(this).find('.progress-right .progress-bar');
+  $(function () {
+    $(".progress").each(function () {
+      var value = $(this).attr("data-value");
+      var left = $(this).find(".progress-left .progress-bar");
+      var right = $(this).find(".progress-right .progress-bar");
 
       if (value > 0) {
         if (value <= 50) {
-          right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+          right.css(
+            "transform",
+            "rotate(" + percentageToDegrees(value) + "deg)"
+          );
         } else {
-          right.css('transform', 'rotate(180deg)')
-          left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+          right.css("transform", "rotate(180deg)");
+          left.css(
+            "transform",
+            "rotate(" + percentageToDegrees(value - 50) + "deg)"
+          );
         }
       }
-
-    })
+    });
 
     function percentageToDegrees(percentage) {
-      return percentage / 100 * 360
+      return (percentage / 100) * 360;
     }
 
     });
@@ -118,8 +117,7 @@ document.addEventListener("turbolinks:load", () => {
 
 // end of turbolinks
 
-
-
+// Progress Bar end
 
 require("trix");
 require("@rails/actiontext");

@@ -4,12 +4,10 @@ const message = document.getElementById("livechat-input");
 const initChatroomCable = () => {
   const messagesContainer = document.getElementById("messages");
   // When entering Room chat goes straight to bottom
-  const scrollChat = () => {
+
+  if (messagesContainer) {
     messagesContainer.scrollTop =
       messagesContainer.scrollHeight - messagesContainer.clientHeight;
-  };
-  scrollChat();
-  if (messagesContainer) {
     const id = messagesContainer.dataset.chatroomId;
 
     consumer.subscriptions.create(
@@ -17,20 +15,20 @@ const initChatroomCable = () => {
       {
         received(data) {
           console.log(data); // called when data is broadcast in the cable
-          messagesContainer.insertAdjacentHTML("beforeend", data);
+          message.addEventListener("keyup", function (e) {
+            if (e.key === "Enter") {
+              messagesContainer.insertAdjacentHTML("beforeend", data);
+              message.value = "";
+              messagesContainer.scrollTop =
+                messagesContainer.scrollHeight - messagesContainer.clientHeight;
+            }
+          });
         },
       }
     );
   }
 
   // Entering Messages Function On keyup("Enter") removes input text and scrollchat
-
-  message.addEventListener("keyup", function (e) {
-    if (e.key === "Enter") {
-      message.value = "";
-      scrollChat();
-    }
-  });
 };
 
 export { initChatroomCable };
