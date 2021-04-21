@@ -28,7 +28,8 @@ const initChatroomCable = () => {
   message.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
       message.value = "";
-      scrollChat();
+      messagesContainer.scrollTop =
+      messagesContainer.scrollHeight - messagesContainer.clientHeight;
     }
   });
 };

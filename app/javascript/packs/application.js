@@ -116,11 +116,6 @@ document.addEventListener("turbolinks:load", () => {
   // Progress Bar end
 
 
-// end of turbolinks
-});
-
-
-
 
 require("trix");
 require("@rails/actiontext");
