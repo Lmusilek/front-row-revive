@@ -117,7 +117,6 @@ document.addEventListener("turbolinks:load", () => {
 
 
 // end of turbolinks
-});
 
 
 
