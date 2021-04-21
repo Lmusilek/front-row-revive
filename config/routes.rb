@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: :about
 
   get 'search', to: 'events#search'
-
+  post 'order/payment', to: "orders#payment", as: :payment
+  post 'order/deposit', to: "orders#deposit", as: :deposit
 
   resources :events do
     resources :event_attendees, only: [:create]
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :rooms
 
-  resources :orders, only: [:show, :create] do
+  resources :orders, only: [:show] do
     resources :payments, only: :new
   end
 
@@ -30,3 +31,4 @@ end
 mount StripeEvent::Engine, at: '/stripe-webhooks'
 
 end
+
