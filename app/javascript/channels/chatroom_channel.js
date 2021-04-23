@@ -16,8 +16,8 @@ const initChatroomCable = () => {
         received(data) {
           console.log(data); // called when data is broadcast in the cable
           message.addEventListener("keyup", function (e) {
+            messagesContainer.insertAdjacentHTML("beforeend", data);
             if (e.key === "Enter") {
-              messagesContainer.insertAdjacentHTML("beforeend", data);
               message.value = "";
               messagesContainer.scrollTop =
                 messagesContainer.scrollHeight - messagesContainer.clientHeight;
@@ -27,8 +27,6 @@ const initChatroomCable = () => {
       }
     );
   }
-
-  // Entering Messages Function On keyup("Enter") removes input text and scrollchat
 };
 
 export { initChatroomCable };
