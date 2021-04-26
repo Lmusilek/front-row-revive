@@ -42,10 +42,9 @@
 <% else %>
   <%= render 'shared/banner' %>
   <div class="container">
-    <h3>Upcoming Events</h3>
-    <p>Displaying <%= @events.count %> events.</p>
+    <h3>Upcoming Global Events</h3>
     <div class="row">
-      <% @events.each do |event| %>
+      <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
         <%= link_to event_path(event) do %>
           <div class="col-4">
             <div class="event-card">
@@ -63,10 +62,19 @@
                   <%= event.country %>  |  <%= event.start_time.strftime('%e %B %Y') %>  |  <%= event.start_time.strftime('%l:%M %p') %>
                 </div>
                 <%# <p>£<%= Money.new(event.price_cents.to_s, :gbp) %>
+                <div class="flex">
+                   <div class="online-box">
+                    <span class="mr-2" >Online </span>
+                </div>
+                 <div class="live-box">
+                    <span class="mr-2" >Live </span>
+                </div>
+
                 <div class="genre-box">
                   <% event.genres.each do |genre| %>
                     <span class="mr-2" ><%= genre.name %> </span>
                   <% end %>
+                </div>
                 </div>
               </div>
             </div>
@@ -74,6 +82,31 @@
         <% end %>
       <% end %>
     </div>
+
+    <h3>Featured Artists</h3>
+
+     <div class="row">
+       <% @artists.first(9).each do |artist| %>
+
+          <div class="col-4">
+            <div class="event-card">
+        
+             <div class="event-card-image" style="background-image: url('<%= cl_image_path artist.photo.key %>')"></div>
+            
+              <div class="event-card-content">
+                <div class="event-card-title">
+                  <h4><%= artist.artist_name %></h4>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+         <% end %>
+    </div>
+
+
+
+
   </div>
 <% end %>
 
