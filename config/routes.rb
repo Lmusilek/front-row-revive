@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'about', to: 'pages#about', as: :about
 
+  get 'how', to: 'pages#how', as: :how
+
   get 'search', to: 'events#search'
   post 'order/payment', to: "orders#payment", as: :payment
   post 'order/deposit', to: "orders#deposit", as: :deposit

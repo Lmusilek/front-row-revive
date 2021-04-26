@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     end
     @search = params[:search]
     @query = params[:query] || params[:city] || params[:country]
-      # @events = Event.all
+    @artists = User.where(artist: true)
   end
 
   # NEW
