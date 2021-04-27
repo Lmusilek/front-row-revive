@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   get 'how', to: 'pages#how', as: :how
 
+  get 'artists-featured', to: 'pages#artists-featured', as: :artistsfeatured
+
+  get 'events-near', to: 'pages#events-near', as: :eventsnear
+
   get 'search', to: 'events#search'
   post 'order/payment', to: "orders#payment", as: :payment
   post 'order/deposit', to: "orders#deposit", as: :deposit
