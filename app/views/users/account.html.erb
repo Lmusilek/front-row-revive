@@ -7,7 +7,7 @@
   <div class="row p-5">
     <div class="account-container">
 
-<!-- Tab links start -->
+
       <div class="tab">
          <% if current_user.photo.attached? %>
            <%= cl_image_tag current_user.photo.key, class: "avatar-account" %>
@@ -25,10 +25,12 @@
         <% end %>
         <button class="tablinks" onclick="openCity(event, 'Edit Profile')"><i class="fas fa-edit account-icon orange-background"></i>Edit Profile</button>
        <% if current_user.artist? %>
-        <button class="tablinks" onclick="openCity(event, 'New Event')"><i class="fas fa-plus-square account-icon aqua-background"></i>New Event</button>
+
+      <button class="tablinks"><i class="fas fa-plus-square account-icon aqua-background"></i> <%= link_to "New Event", new_event_path %></button>
+
+
        <% end %>
       </div>
-<!-- Tab links end -->
 
         <div id="Account Overview" class="tabcontent">
           <div class="row p-5">
@@ -226,7 +228,6 @@
           </div>
 <!--Edit profile end -->
 
-<!-- events new tab start? -->
          <% if current_user.artist? %>
           <div id="New Event" class="tabcontent">
             <div>
@@ -234,7 +235,6 @@
             </div>
           </div>
         <% end %>
-<!-- events new tab end? -->
 
     </div>
   </div>
