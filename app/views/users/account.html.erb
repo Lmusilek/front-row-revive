@@ -7,30 +7,7 @@
   <div class="row p-5">
     <div class="account-container">
 
-
-      <div class="tab">
-         <% if current_user.photo.attached? %>
-           <%= cl_image_tag current_user.photo.key, class: "avatar-account" %>
-        <% else %>
-          <%= image_tag "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-12.jpg", class: "avatar-account" %>
-        <% end %>
-        <span><%= current_user.first_name %></span>
-        <br />
-        <span class="menu-icon">Menu</span>
-        <button class="tablinks" onclick="openCity(event, 'Account Overview')" id="defaultOpen"><i class="fas fa-user account-icon purple-background"></i> Account overview</button>
-        <button class="tablinks" onclick="openCity(event, 'Tickets')"><i class="fas fa-ticket-alt account-icon blue-background"></i>Tickets</button>
-        <% if current_user.artist? %>
-          <button class="tablinks" onclick="openCity(event, 'Artist Details')"><i class="fas fa-music account-icon pink-background"></i>Artist Details</button>
-          <button class="tablinks" onclick="openCity(event, 'Manage Events')"><i class="fas fa-cog account-icon green-background"></i>Manage Events</button>
-        <% end %>
-        <button class="tablinks" onclick="openCity(event, 'Edit Profile')"><i class="fas fa-edit account-icon orange-background"></i>Edit Profile</button>
-       <% if current_user.artist? %>
-
-      <button class="tablinks"><i class="fas fa-plus-square account-icon aqua-background"></i> <%= link_to "New Event", new_event_path %></button>
-
-
-       <% end %>
-      </div>
+    <%= render "users/partial/tabs" %>
 
         <div id="Account Overview" class="tabcontent">
           <div class="row p-5">
