@@ -45,83 +45,8 @@
           </div>
         </div>
 
-<!-- Ticket section start -->
-      <div id="Tickets" class="tabcontent">
-          <div class="row p-5">
-            <div class="col-md-12">
-              <h2>My tickets</h2>
-              <% if current_user.orders.any? %>
 
-                <table>
-                <tr class="row-border">
-                  <th class="lable"> Event: </th>
-                  <th class="lable-sm">Date: </th>
-                  <th class="lable-sm">Time: </th>
-                  <th class="lable-sm">Link: </th>
-                </tr>
 
-              <% current_user.orders.each do |event_attendee|  %>
-
-                <tr class="row-border">
-                  <td><%= event_attendee.event.event_name %></td>
-                  <td><%= event_attendee.event.start_time.strftime('%e %B %Y') %></td>
-                  <td><%= event_attendee.event.end_time.strftime('%l:%M %p') %></td>
-                  <td><%= link_to 'Link', event_path(event_attendee.event) %></td>
-                </tr>
-                <% end %>
-              </table>
-
-              <% else %>
-                <div class="w-100"><p>Your basket is empty.</p></div>
-              <% end %>
-          </div>
-        </div>
-      </div>
-<!-- Ticket section end -->
-
-<!-- Artist details start -->
-      <% if current_user.artist? %>
-        <div id="Artist Details" class="tabcontent">
-          <div class="row p-5">
-            <div class="col-md-12">
-
-                <h2>Artist Details</h2>
-
-                <table>
-                  <tr class="row-border">
-                    <td class="lable-sm">Artist Name: </td>
-                    <td><%= current_user.artist_name %></td>
-                  </tr>
-                  <tr class="row-border">
-                    <td class="lable-sm">Facebook:</td>
-                    <td><%= current_user.facebook %></td>
-                  </tr>
-                  <tr class="row-border">
-                    <td class="lable-sm">Instagram:</td>
-                    <td><%= current_user.instagram %></td>
-                  </tr>
-                  <tr class="row-border">
-                    <td class="lable-sm">Youtube:</td>
-                    <td><%= current_user.youtube %></td>
-                  </tr>
-                  <tr class="row-border">
-                    <td class="lable-sm">Spotify:</td>
-                    <td><%= current_user.spotify %></td>
-                  </tr>
-                  <tr class="row-border">
-                      <td class="lable-sm">Bio: </td>
-                      <td class="multi-line"><%= current_user.bio %></td>
-                  </tr>
-                </table>
-
-                <div class="col-md-12 mt-5">
-                  <button type="button" class="btn btn-primary d-none"> <%= link_to 'Edit profile', edit_user_registration_path %> </button>
-                </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-<!-- Artist details end -->
 
 <!-- Manage events start -->
           <div id="Manage Events" class="tabcontent">
@@ -172,7 +97,7 @@
 
                     </div>
                   <% end %>
-                <% end %>
+
 
               </div>
             </div>

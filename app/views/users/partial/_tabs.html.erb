@@ -21,8 +21,8 @@
             <% end %>
 
 
-            <%= link_to users_ticket_path do %>
-            <button class="tablinks">
+            <%= link_to users_manage_path do %>
+            <button class="tablinks <%= 'active' if current_page?(users_manage_path) %>">
               <i class="fas fa-cog account-icon green-background"></i>Manage Events
             </button>
             <% end %>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "/artists", to: "users#index", as: :artists
   get 'users/account'
   get 'users/ticket'
+  get 'users/manage'
   patch 'users/update'
   devise_for :users
   root to: 'events#index'
