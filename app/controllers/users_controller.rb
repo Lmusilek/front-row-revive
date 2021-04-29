@@ -24,6 +24,11 @@ class UsersController < ApplicationController
     @events = Event.where(user: current_user)
   end
 
+  def manage
+    @events = Event.where(user: current_user)
+    @event = Event.new
+  end
+
   private
 
   # PARAMS
