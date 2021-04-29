@@ -10,8 +10,7 @@ class UsersController < ApplicationController
   end
 
   def account
-    @events = Event.where(user: current_user)
-    @event = Event.new
+    @user = current_user
   end
 
   def update
