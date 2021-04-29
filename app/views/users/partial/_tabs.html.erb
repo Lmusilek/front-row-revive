@@ -14,16 +14,16 @@
             </button>
           <% end %>
 
-          <%= link_to users_account_path do %>
-            <button class="tablinks">
+          <%= link_to users_ticket_path do %>
+            <button class="tablinks <%= 'active' if current_page?(users_ticket_path) %>">
               <i class="fas fa-ticket-alt account-icon blue-background"></i>Tickets
             </button>
-          <% end %>
+            <% end %>
 
 
-            <%= link_to users_account_path do %>
+            <%= link_to users_ticket_path do %>
             <button class="tablinks">
-              <i class="fas fa-music account-icon pink-background"></i>Manage Events
+              <i class="fas fa-cog account-icon green-background"></i>Manage Events
             </button>
             <% end %>
 
@@ -37,7 +37,7 @@
 
             <%= link_to new_event_path do %>
                <button class="tablinks <%= 'active' if current_page?(new_event_path) %>">
-                <i class="fas fa-edit account-icon orange-background"></i>New Event
+                <i class="fas fa-plus-square account-icon aqua-background"></i>New Event
               </button>
             <% end %>
 
