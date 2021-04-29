@@ -6,6 +6,8 @@
 <div class="container">
   <div class="row p-5">
     <div class="account-container">
+
+<!-- Tab links start -->
       <div class="tab">
          <% if current_user.photo.attached? %>
            <%= cl_image_tag current_user.photo.key, class: "avatar-account" %>
@@ -26,6 +28,7 @@
         <button class="tablinks" onclick="openCity(event, 'New Event')"><i class="fas fa-plus-square account-icon aqua-background"></i>New Event</button>
        <% end %>
       </div>
+<!-- Tab links end -->
 
         <div id="Account Overview" class="tabcontent">
           <div class="row p-5">
@@ -63,6 +66,7 @@
           </div>
         </div>
 
+<!-- Ticket section start -->
       <div id="Tickets" class="tabcontent">
           <div class="row p-5">
             <div class="col-md-12">
@@ -94,7 +98,9 @@
           </div>
         </div>
       </div>
+<!-- Ticket section end -->
 
+<!-- Artist details start -->
       <% if current_user.artist? %>
         <div id="Artist Details" class="tabcontent">
           <div class="row p-5">
@@ -136,7 +142,9 @@
           </div>
         </div>
       <% end %>
+<!-- Artist details end -->
 
+<!-- Manage events start -->
           <div id="Manage Events" class="tabcontent">
             <div class="row p-5">
               <div class="col-md-12">
@@ -190,7 +198,9 @@
               </div>
             </div>
           </div>
+<!-- Manage events end -->
 
+<!--Edit profile start -->
           <div id="Edit Profile" class="tabcontent">
             <div class="row p-5">
               <div class="col-md-12">
@@ -214,7 +224,9 @@
               </div>
             </div>
           </div>
+<!--Edit profile end -->
 
+<!-- events new tab start? -->
          <% if current_user.artist? %>
           <div id="New Event" class="tabcontent">
             <div>
@@ -222,10 +234,12 @@
             </div>
           </div>
         <% end %>
+<!-- events new tab end? -->
 
     </div>
   </div>
 </div>
+
 
   <script>
   function openCity(evt, cityName) {
