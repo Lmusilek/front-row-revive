@@ -9,7 +9,7 @@
         <br />
         <span class="menu-icon">Menu</span>
           <%= link_to users_account_path do %>
-            <button class="tablinks">
+            <button class="tablinks <%= 'active' if current_page?(users_account_path) %>">
               <i class="fas fa-user account-icon purple-background"></i>Account Overview
             </button>
           <% end %>
