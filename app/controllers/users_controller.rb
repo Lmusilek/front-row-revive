@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     redirect_to users_account_path
   end
 
+  def ticket
+    @events = Event.where(user: current_user)
+  end
+
   private
 
   # PARAMS
