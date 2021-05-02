@@ -5,7 +5,17 @@
 <div class="flex-top-a">
 <%# <% if @user.photo.attached? %>
   <%= cl_image_tag @user.photo.key, class: "avatar-artist" %>
-<div class="social-list">
+
+<%# <% else
+  <%= image_tag "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-12.jpg", class: "avatar_account" %>
+<%# <% end %> 
+</div>
+
+<div class="flex-bottom-a">
+<h1><%= @user.artist_name %></h1>
+  <p><%= @user.bio %></p>
+
+  <div class="social-list">
 <p class="follow-icons">
 <a href="<%= @user.instagram %>" target="_blank">
 
@@ -18,16 +28,6 @@
 
 </p>
 </div> 
-
-<%# <% else
-  <%= image_tag "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-12.jpg", class: "avatar_account" %>
-<%# <% end %> 
-</div>
-
-<div class="flex-bottom-a">
-<h1><%= @user.artist_name %></h1>
-  <br />
-  <p><%= @user.bio %></p>
 
 </div>
 </div>

@@ -11,12 +11,12 @@
 }
 
 .event-card {
-  width: 350px;
+  width: 320px;
   position: relative;
-  margin: 20px 0px 20px 0;
-  border-radius: 10px;
-  background-color: transparent;
-  transition: 200ms;
+  margin: 20px 30px 20px 0;
+  border-radius: 2px;
+  background-color: rgb(22, 22, 22);
+  transition: 100ms;
   color: white;
 }
 
@@ -24,13 +24,13 @@
   background-position: center;
   background-size: cover;
   border-radius: 2px;
-  height: 180px;
+  height: 160px;
   transition: 800ms;
 }
 
 .event-card-image:hover {
-  height: 185;
-  width: 103%;
+  // height: 185;
+  // width: 103%;
   filter: brightness(120%);
 }
 
@@ -62,11 +62,11 @@
 }
 
 .event-card-title h4 {
-  font-size: 15px;
+  font-size: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 350px;
+  max-width: 380px;
   padding-top: 5px;
   font-weight: bolder;
 }
@@ -77,7 +77,25 @@
 }
 
 .genre-box span {
-  background-color: rgba(70, 70, 70, 0.575);
+  background-color: #4b4b4bb7;
+  padding: 5px;
+  font-size: 10px;
+  color: white;
+  font-weight: bolder;
+  margin-top: 8px;
+}
+
+// .live-box span {
+//   background-color: #288328;
+//   padding: 5px;
+//   font-size: 10px;
+//   color: white;
+//   font-weight: bolder;
+//   margin-top: 8px;
+// }
+
+.online-box span {
+  background-color: #672af9;
   padding: 5px;
   font-size: 10px;
   color: white;

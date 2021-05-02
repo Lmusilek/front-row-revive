@@ -10,14 +10,22 @@ class UsersController < ApplicationController
   end
 
   def account
-    @events = Event.where(user: current_user)
-    @event = Event.new
+    @user = current_user
   end
 
   def update
     @user = current_user
     @user.update(user_params)
     redirect_to users_account_path
+  end
+
+  def ticket
+    @events = Event.where(user: current_user)
+  end
+
+  def manage
+    @events = Event.where(user: current_user)
+    @event = Event.new
   end
 
   private
