@@ -17,6 +17,7 @@
                 <%= f.input :city %>
                 <%= f.country_select :country, priority_countries: ["GB", "US"] %>
                 <%= f.input :price_cents, label: "Price per Ticket in £" %>
+                <%= f.currency_select(:currency, ["USD", "EUR", "GBP", "ZAR"], {}, {class: "form-control"}) -%>
                 <%= f.input :funding, label: "Crowd Funding Target" %>
                 <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: "Select your Genre" %>
                 <%= f.input :photo, as: :file %>

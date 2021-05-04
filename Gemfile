@@ -81,4 +81,4 @@ gem 'groupdate'
 
 gem 'rspotify'
 gem 'redis'
-
+gem 'currency_select'

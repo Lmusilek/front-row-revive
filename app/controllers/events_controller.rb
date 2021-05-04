@@ -25,6 +25,7 @@ class EventsController < ApplicationController
   # SHOW
   def show
     @event = Event.find(params[:id])
+    @amount = params[:amount]
 
     # User IP tracker - switched off due to certificate error
     # UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
@@ -101,6 +102,6 @@ class EventsController < ApplicationController
   # PARAMS
 
   def event_params
-    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding)
+    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding, :amount, :currency)
   end
 end

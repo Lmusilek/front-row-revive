@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'search', to: 'events#search'
   post 'order/payment', to: "orders#payment", as: :payment
   post 'order/deposit', to: "orders#deposit", as: :deposit
+  post 'order/deposit', to: "orders#deposit", as: :donate_amount
 
   resources :events do
     resources :event_attendees, only: [:create]
