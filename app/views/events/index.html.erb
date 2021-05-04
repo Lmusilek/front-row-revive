@@ -63,13 +63,19 @@
                     <%= event.start_time.strftime('%e %B %Y') %>  |  <%= event.start_time.strftime('%l:%M %p') %>
                 </div>
                 <%# <p>£<%= Money.new(event.price_cents.to_s, :gbp) %>
+              
                 <div class="flex">
+                <% if event.online %>
                    <div class="online-box">
                     <span class="mr-2" >Online </span>
                 </div>
-                 <%# <div class="live-box">
-                    <span class="mr-2" >Live </span>
-                </div> %>
+                <% end %>
+
+                   <% if event.in_person %>
+                   <div class="live-box">
+                    <span class="mr-2" >In Person </span>
+                </div>
+                <% end %>
 
                 <div class="genre-box">
                   <% event.genres.each do |genre| %>
@@ -92,17 +98,18 @@
        <% @artists.first(9).each do |artist| %>
 
           <div class="col-4">
-            <div class="event-card">
+            <div class="artist-card">
         
-             <div class="event-card-image" style="background-image: url('<%= cl_image_path artist.photo.key %>')"></div>
+             <div class="artist-card-image" style="background-image: url('<%= cl_image_path artist.photo.key %>')">
             
-              <div class="event-card-content">
-                <div class="event-card-title">
+              <div class="artist-card-content">
+                <div class="artist-card-title">
                   <h4><%= artist.artist_name %></h4>
                 </div>
                
               </div>
             </div>
+          </div>
           </div>
          <% end %>
     </div>

@@ -16,8 +16,13 @@
   margin: 20px 30px 20px 0;
   border-radius: 2px;
   background-color: rgb(22, 22, 22);
-  transition: 100ms;
+  transition: 500ms;
   color: white;
+}
+
+.event-card:hover {
+  transform: scale(1.05);
+  filter: brightness(120%);
 }
 
 .event-card-image {
@@ -26,12 +31,6 @@
   border-radius: 2px;
   height: 160px;
   transition: 800ms;
-}
-
-.event-card-image:hover {
-  // height: 185;
-  // width: 103%;
-  filter: brightness(120%);
 }
 
 .event-card-content {
@@ -85,14 +84,14 @@
   margin-top: 8px;
 }
 
-// .live-box span {
-//   background-color: #288328;
-//   padding: 5px;
-//   font-size: 10px;
-//   color: white;
-//   font-weight: bolder;
-//   margin-top: 8px;
-// }
+.live-box span {
+  background-color: #3eb650;
+  padding: 5px;
+  font-size: 10px;
+  color: white;
+  font-weight: bolder;
+  margin-top: 8px;
+}
 
 .online-box span {
   background-color: #672af9;
@@ -101,4 +100,60 @@
   color: white;
   font-weight: bolder;
   margin-top: 8px;
+}
+
+.artist-card {
+  width: 320px;
+  position: relative;
+  margin: 20px 30px 20px 0;
+  border-radius: 2px;
+  background-color: rgb(22, 22, 22);
+  transition: 100ms;
+  color: white;
+}
+
+.artist-card-image {
+  background-position: center;
+  background-size: cover;
+  border-radius: 2px;
+  height: 160px;
+  transition: 500ms;
+}
+
+.artist-card-image:hover {
+  // height: 185;
+  // width: 103%;
+  filter: brightness(120%);
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.artist-card-content {
+  background-color: transparent;
+  padding: 5px;
+}
+
+.artist-card a {
+  color: white;
+}
+
+.artist-show-card {
+  background-color: transparent;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.artist-card-title h4 {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 380px;
+  padding-top: 5px;
+  font-weight: bolder;
+}
+
+.artist-card-title p {
+  font-size: 12px;
+  margin-bottom: 6px;
 }
