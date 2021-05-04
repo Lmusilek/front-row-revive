@@ -88,8 +88,14 @@ ActiveRecord::Schema.define(version: 2021_05_04_114026) do
 =======
     t.boolean "online"
     t.boolean "in_person"
+<<<<<<< HEAD
 >>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 16f88c36304e4b0eee25a67413ef9af84582a5e7
     t.string "currency"
+>>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

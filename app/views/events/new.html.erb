@@ -2,6 +2,34 @@
   <div class="row p-5">
     <div class="account-container">
 
+<<<<<<< HEAD
+<div class="container rounded" style="width: 900px;">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <%= simple_form_for (@event) do |f| %>
+        <%= f.input :event_name, input_html: { class: "nice-class", maxlength: 50 } %>
+        <%= f.label :Description %>
+      
+        <%= f.rich_text_area :description, input_html: { maxlength: 150 } %>
+        <label class="flex switch switch-primary">
+        <%= f.label :Online_show? %>
+        <%= f.input :online, label: false, as: :boolean, class: 'form-control' %>
+        </label>
+        <label class="flex switch switch-primary">
+        <%= f.label :In_person_show? %>
+        <%= f.input :in_person, label: false, as: :boolean, class: 'form-control' %>
+        </label>
+        <%= f.input :start_time, as: :string, required: true, input_html: {class: "datepicker"} %>
+        <%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %>
+        <%= f.input :city %>
+        <%= f.country_select :country, priority_countries: ["GB", "US"] %>
+        <%= f.input :price_cents, label: "Price per Ticket in £" %>
+        <%= f.input :funding, label: "Crowd Funding Target" %>
+        <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: "Select your Genre" %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit 'Add your Event', class: 'btn btn-primary' %>
+      <% end %>
+=======
     <%= render "users/partial/tabs" %>
 
       <div id="Account Overview" class="tabcontent">
@@ -26,6 +54,7 @@
             </div>
           </div>
         </div>
+>>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
     </div>
   </div>
 </div>

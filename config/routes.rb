@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get 'how', to: 'pages#how', as: :how
 
+  get 'how/forartists', :to => 'pages#show', as: :forartists
+
   get 'artists-featured', to: 'pages#artists-featured', as: :artistsfeatured
 
   get 'nearme', to: 'events#nearme', as: :nearme

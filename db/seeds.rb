@@ -185,7 +185,9 @@ artists.each do |artist|
       currency: "GBP",
       country: country_arr.sample,
       funding: rand(1..1000),
-      user: artist
+      user: artist,
+      online: true,
+      in_person: true
       )
     file = URI.open(event_img_arr.sample)
     event.photo.attach(io: file, filename: 'nes.png', content_type: 'image/png')
