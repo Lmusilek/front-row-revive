@@ -69,6 +69,7 @@ document.addEventListener("turbolinks:load", () => {
       return false;
     }
   });
+  
   // Flatpickr
   initFlatpickr();
 
@@ -110,10 +111,15 @@ document.addEventListener("turbolinks:load", () => {
     function percentageToDegrees(percentage) {
       return (percentage / 100) * 360;
     }
-  });
-});
+
+    });
+  // Progress Bar end
+
+
+// end of turbolinks
 
 // Progress Bar end
 
 require("trix");
 require("@rails/actiontext");
+})

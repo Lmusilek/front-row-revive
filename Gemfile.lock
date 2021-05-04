@@ -90,6 +90,9 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.1)
     crass (1.0.6)
+    currency_select (3.0.0)
+      actionview (>= 5.2.0, < 6.2)
+      money (~> 6.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -341,6 +344,7 @@ DEPENDENCIES
   chartkick
   cloudinary (~> 1.16.0)
   country_select
+  currency_select
   devise
   dotenv-rails
   faker
