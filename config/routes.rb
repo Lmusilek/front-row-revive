@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'artists-featured', to: 'pages#artists-featured', as: :artistsfeatured
 
-  get 'events-near', to: 'pages#events-near', as: :eventsnear
+  get 'nearme', to: 'events#nearme', as: :nearme
 
   get 'search', to: 'events#search'
   post 'order/payment', to: "orders#payment", as: :payment
