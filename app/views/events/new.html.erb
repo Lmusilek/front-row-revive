@@ -2,7 +2,6 @@
   <div class="row p-5">
     <div class="account-container">
 
-<<<<<<< HEAD
 <div class="container rounded" style="width: 900px;">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -23,13 +22,14 @@
         <%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %>
         <%= f.input :city %>
         <%= f.country_select :country, priority_countries: ["GB", "US"] %>
-        <%= f.input :price_cents, label: "Price per Ticket in £" %>
+        <%= f.input :price_cents, label: "Price Per Ticket" %>
+          <%= f.currency_select(:currency, ["USD", "EUR", "GBP", "ZAR"], {}, {class: "form-control"}) -%>
         <%= f.input :funding, label: "Crowd Funding Target" %>
         <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: "Select your Genre" %>
         <%= f.input :photo, as: :file %>
         <%= f.submit 'Add your Event', class: 'btn btn-primary' %>
       <% end %>
-=======
+
     <%= render "users/partial/tabs" %>
 
       <div id="Account Overview" class="tabcontent">
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
->>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
+
     </div>
   </div>
 </div>
