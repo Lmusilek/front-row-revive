@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2021_05_02_210036) do
+=======
 
 ActiveRecord::Schema.define(version: 2021_05_04_114026) do
 
+>>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +93,10 @@ ActiveRecord::Schema.define(version: 2021_05_04_114026) do
     t.integer "funding"
     t.boolean "online"
     t.boolean "in_person"
+<<<<<<< HEAD
+=======
     t.string "currency"
+>>>>>>> 1853bd9da68b7981d1cd210b47c24e60abcab927
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

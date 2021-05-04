@@ -7,6 +7,14 @@
             <%= f.input :event_name, input_html: { class: "nice-class", maxlength: 50 }  %>
             <%= f.label :Description %>
             <%= f.rich_text_area :description, input_html: { maxlength: 150 }, input_html: {class: "pr-0"} %>
+             <label class="flex switch switch-primary">
+            <%= f.label :Online_show? %>
+            <%= f.input :online, label: false, as: :boolean, class: 'form-control' %>
+            </label>
+            <label class="flex switch switch-primary">
+            <%= f.label :In_person_show? %>
+            <%= f.input :in_person, label: false, as: :boolean, class: 'form-control' %>
+            </label>
             <div class="d-flex">
               <div class="col-md-6 pl-0"><%= f.input :start_time, as: :string, required: true, input_html: {class: "datepicker"} %></div>
               <div class="col-md-6 pr-0"><%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %></div>
