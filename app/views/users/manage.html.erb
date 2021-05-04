@@ -1,0 +1,100 @@
+<% content_for :chartkick do %>
+  <%= javascript_pack_tag 'chartkick' %>
+  <%= javascript_include_tag "//www.google.com/jsapi" %>
+<% end %>
+
+
+<div class="container">
+  <div class="row p-5">
+    <div class="account-container">
+
+    <%= render "users/partial/tabs" %>
+
+      <div id="Account Overview" class="tabcontent">
+        <div class="row p-5">
+          <div class="col-md-12">
+
+              <% if current_user.artist? %>
+                  <h2>My Events</h2>
+                <% @events.each_with_index do |event, index| %>
+
+                  <div class="event-line">
+                     <%= event.event_name %>
+                    <div class="button-box">
+                      <button  class="d-none" id="delete-button"><%= link_to 'Delete island', event_path(event), method: 'delete', data: { confirm: "Are you sure?" } %></button>
+                      <button type="button" class="stats-button"> <%= link_to 'Edit event', edit_event_path(event) %> </button>
+                      <button class="stats-button btn_stats" data-btn="stats_<%= event.id %>"><%= index == 0 ? "Showing" : "Show" %></button>
+                    </div>
+                  </div>
+              <% end %>
+
+              <% @events.each_with_index do |event, index| %>
+                <div class="container stats_box <%= "d-none" unless index == 0 %> " data-stats="stats_<%= event.id %>">
+                  <div class="row p-3">
+                    <div class="col-md-9 p-3">
+                        <%= line_chart UserView.where(event_id: event).group_by_day(:created_at).count, id: "line_chart#{index}" %>
+                    </div>
+
+                    <div class="col-md-3 p-3">
+                      <div class="align-middle d-flex justify-content-center align-items-center h-50 p-3 grey-border-bottom">
+                        <div class="text-center">
+                          <p><strong>Total Income</strong></p>
+                          £<%= Money.new((event.price_cents)*(Order.where(event_id: event).count),:gbp) %>
+                        </div>
+                      </div>
+                      <div class="align-middle d-flex justify-content-center align-items-center h-50 p-3 ">
+                       <div class="text-center">
+                        <p><strong>Total Sales</strong></p>
+                          <%=(Order.where(event_id: event).count) %>
+                        </div>
+                      </div>
+                    </div>
+                 </div>
+
+                  <div class="row">
+                    <div class="col-md-12 p-3">
+                      <%= geo_chart UserView.where(event_id: event).group(:country).count, id: "map_chart#{index}"  %>
+                    </div>
+                  </div>
+
+                </div>
+              <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  const buttons = document.querySelectorAll(".btn_stats");
+  const boxs = document.querySelectorAll(".stats_box");
+
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        boxs.forEach((box) => {
+          if (button.dataset.btn === box.dataset.stats) {
+            buttons.forEach(button => button.innerText = "Show");
+            event.target.innerText = "Showing"
+            box.classList.add("d-block")
+            box.classList.remove("d-none")
+          } else {
+            box.classList.remove("d-block")
+            box.classList.add("d-none")
+          }
+        })
+      })
+    })
+  </script>
+
+  <script>
+    Chartkick.eachChart( function(chart) {
+    chart.redraw();
+    });
+  </script>
+
+

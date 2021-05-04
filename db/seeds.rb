@@ -182,6 +182,7 @@ artists.each do |artist|
       start_time: DateTime.new(2021, rand(3..9), rand(12..30), rand(1..23)),
       end_time: DateTime.new(2021,6,20,9),
       city: Faker::Address.city,
+      currency: "GBP",
       country: country_arr.sample,
       funding: rand(1..1000),
       user: artist,

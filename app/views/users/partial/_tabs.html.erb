@@ -1,0 +1,46 @@
+<!-- Tab links start -->
+      <div class="tab">
+         <% if current_user.photo.attached? %>
+           <%= cl_image_tag current_user.photo.key, class: "avatar-account" %>
+        <% else %>
+          <%= image_tag "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-12.jpg", class: "avatar-account" %>
+        <% end %>
+        <span><%= current_user.first_name %></span>
+        <br />
+        <span class="menu-icon">Menu</span>
+          <%= link_to users_account_path do %>
+            <button class="tablinks <%= 'active' if current_page?(users_account_path) %>">
+              <i class="fas fa-user account-icon purple-background"></i>Account Overview
+            </button>
+          <% end %>
+
+          <%= link_to users_ticket_path do %>
+            <button class="tablinks <%= 'active' if current_page?(users_ticket_path) %>">
+              <i class="fas fa-ticket-alt account-icon blue-background"></i>Tickets
+            </button>
+            <% end %>
+
+
+            <%= link_to users_manage_path do %>
+            <button class="tablinks <%= 'active' if current_page?(users_manage_path) %>">
+              <i class="fas fa-cog account-icon green-background"></i>Manage Events
+            </button>
+            <% end %>
+
+
+
+            <%= link_to edit_user_registration_path do %>
+              <button class="tablinks <%= 'active' if current_page?(edit_user_registration_path) %>">
+                <i class="fas fa-edit account-icon orange-background"></i>Edit Profile
+              </button>
+            <% end %>
+
+            <%= link_to new_event_path do %>
+               <button class="tablinks <%= 'active' if current_page?(new_event_path) %>">
+                <i class="fas fa-plus-square account-icon aqua-background"></i>New Event
+              </button>
+            <% end %>
+
+
+      </div>
+<!-- Tab links end -->
