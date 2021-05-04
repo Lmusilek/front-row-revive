@@ -44,7 +44,7 @@
 
 <p><%= @event.start_time.strftime('%l:%M %p') %></p>
 
-<p>£<%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+<p><%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
 
 <p style="color:gray">Please note: all events are currently available to stream worldwide</p>
 
@@ -53,12 +53,25 @@
     <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %>
     <% elsif @event.user == current_user %>
     <%= link_to "Start Stream", room_path(@event.room), class: 'btn btn-primary' %>
+    <%# elsif @event.funding.present? %>
+    <%#= form_tag deposit_path do %>
+    <%#= text_field_tag(:amount) %>
+    <%#= hidden_field_tag 'event_id', @event.id %>
+    <%#= submit_tag 'Donate', class: 'btn btn-primary' %>
+    <%# end %>
     <% else %>
     <%= form_tag payment_path do %>
     <%= hidden_field_tag 'event_id', @event.id %>
     <%= submit_tag 'Buy Ticket', class: 'btn btn-primary' %>
     <% end %>
  <% end %>
+
+ <%#= form_with url: donate_amount_path do |form| %>
+  <%#= form.label :test, "Amount" %>
+  <%#= form.text_field :amount %>
+  <%#= hidden_field_tag 'event_id', @event.id %>
+  <%#= form.submit "Donate" %>
+<%# end %>
 </div>
 
     <div class="col-xl-3 col-lg-6 mb-4">

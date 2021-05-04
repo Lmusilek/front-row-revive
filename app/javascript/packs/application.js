@@ -69,6 +69,7 @@ document.addEventListener("turbolinks:load", () => {
       return false;
     }
   });
+  
   // Flatpickr
   initFlatpickr();
 
@@ -121,3 +122,4 @@ document.addEventListener("turbolinks:load", () => {
 
 require("trix");
 require("@rails/actiontext");
+})

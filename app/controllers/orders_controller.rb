@@ -7,14 +7,13 @@ class OrdersController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         name: event.sku,
-        mode: 'setup',
         images: [event.photo],
         amount: event.price_cents,
-        currency: 'gbp',
-        quantity: 1
+        currency: event.currency,
+        quantity: 1,
       }],
-      success_url: "https://www.frontrow.host/orders/#{order.id}",
-      cancel_url: "https://www.frontrow.host/orders/#{order.id}"
+      success_url: "https://www.frontrowgigs.com/orders/#{order.id}",
+      cancel_url: "https://www.frontrowgigs.com/orders/#{order.id}"
     )
 
     order.update(checkout_session_id: session.id)
@@ -22,14 +21,29 @@ class OrdersController < ApplicationController
   end
 
   def deposit
-    raise
+    amount_no_cents = (params[:amount].to_i) * 100
+    amount_cents = params[:amount]
     event = Event.find(params[:event_id])
-    order = Order.create!(event: event, event_sku: event.sku, amount: event.price, state: 'paid', user: current_user)
+    order = Order.create!(event: event, event_sku: event.sku, amount: amount_cents, state: 'paid', user: current_user)
+    test_order =  Order.where(event_id: event.id).count
+    test_order += amount_cents.to_i
+
+    customer = Stripe::Customer.create({
+      description: 'My First Test Customer (created for API docs)',
+      name: current_user.first_name,
+    })
 
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
-      mode: 'setup',
-      success_url: "https://www.frontrow.host/orders/#{order.id}",
+      line_items: [{
+        name: event.sku,
+        images: [event.photo],
+        amount: amount_no_cents,
+        currency: event.currency,
+        quantity: 1,
+  
+      }],
+      success_url: "http://localhost:3000/events/#{event.id}",
       cancel_url: "https://www.frontrow.host/orders/#{order.id}"
     )
 
