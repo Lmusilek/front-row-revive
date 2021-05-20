@@ -88,6 +88,12 @@ class EventsController < ApplicationController
       @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
       @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
       # elsif params[:query].empty?
+      @sorted_countries = []
+      @city_event = @events.each do |event|
+        sorted = event.searchable
+        @sorted_countries << sorted
+      end
+      @unique_countries = @sorted_countries.uniq(&:country)
       #   alert()
     else
       @events = Event.all

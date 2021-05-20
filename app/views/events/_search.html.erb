@@ -50,8 +50,8 @@
           <div class="sorted-table mb-4" id="event-genre">
               <h3 class="mb-3">Countries</h3>
                 <ul>
-                  <% events.each do |event| %>
-                    <li class="mb-3"><%= image_tag "globe.png", class: "avatar-search mr-3" %><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).country}", events_path(country: event.searchable_type.constantize.find(event.searchable_id).country, search: true) %></li>
+                  <% @unique_countries.each do |event| %>
+                    <li class="mb-3"><%= image_tag "globe.png", class: "avatar-search mr-3" %><%= link_to "#{event.country}", events_path(country: event.country, search: true) %></li>
                   <% end %>
                 </ul>
           </div>
@@ -59,9 +59,11 @@
       <% end %>
 
       <% unless events.empty? %>
+      
         <div class="col-md-6">
           <div class="sorted-table mb-4" id="event-genre">
             <h3 class="mb-3">Cities</h3>
+            
               <ul>
                 <% events.each do |event| %>
                   <li class="mb-3"><%= image_tag "city.png", class: "avatar-search mr-3" %><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).city}", events_path(city: event.searchable_type.constantize.find(event.searchable_id).city, search: true) %></li>

@@ -10,10 +10,11 @@ class OrdersController < ApplicationController
         images: [event.photo],
         amount: event.price_cents,
         currency: event.currency,
-        quantity: 1,
+        quantity: 1
       }],
       success_url: "https://www.frontrowgigs.com/orders/#{order.id}",
-      cancel_url: "https://www.frontrowgigs.com/orders/#{order.id}"
+      cancel_url: "https://www.frontrowgigs.com/events/#{events.id}"
+
     )
 
     order.update(checkout_session_id: session.id)
