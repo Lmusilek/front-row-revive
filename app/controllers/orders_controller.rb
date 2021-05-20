@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
         quantity: 1
       }],
       success_url: "https://www.frontrowgigs.com/orders/#{order.id}",
-      cancel_url: "https://www.frontrowgigs.com/events/#{events.id}"
+      cancel_url: "https://www.frontrowgigs.com/events/#{event.id}"
 
     )
 
