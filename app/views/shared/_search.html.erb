@@ -9,7 +9,7 @@
             <%= text_field_tag :query,
               params[:query],
               id: "form-field",
-              placeholder: "Find an artist, event or genre...",
+              placeholder: "Find an artist, city, event or genre...",
               data: { search_target: "input", action: "keyup->search#searchResults" }
             %>
           <% end %>

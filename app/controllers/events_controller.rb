@@ -30,14 +30,14 @@ class EventsController < ApplicationController
     # User IP tracker - switched off due to certificate error
     # UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
 
-    @funding = @event.funding
-    @sales = Order.where(event_id: @event).count
-    @percent_text = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
-    if @sales >= @funding
-      @percent_bar = 100
-    else
-      @percent_bar = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
-    end
+    # @funding = @event.funding
+    # @sales = Order.where(event_id: @event).count
+    # @percent_text = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    # if @sales >= @funding
+    #   @percent_bar = 100
+    # else
+    #   @percent_bar = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    # end
   end
 
   # CREATE
@@ -104,6 +104,36 @@ class EventsController < ApplicationController
   end
 
     def nearme
+
+      if params[:query].present? 
+      # @events = Event.where("event_name ILIKE ?", "%#{params[:query]}%")
+      @artists = PgSearch.multisearch(params[:query]).where(searchable_type: 'User')
+      @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
+      @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
+      # elsif params[:query].empty?
+      #   alert()
+    else
+      @events = Event.all
+    end
+    @search = params[:search]
+    @query = params[:query] || params[:city] || params[:country]
+
+    end
+
+    def searchcity
+
+      if params[:query].present?
+      # @events = Event.where("event_name ILIKE ?", "%#{params[:query]}%")
+      @artists = PgSearch.multisearch(params[:query]).where(searchable_type: 'User')
+      @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
+      @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
+      # elsif params[:query].empty?
+      #   alert()
+    else
+      @events = Event.all
+    end
+    @search = params[:search]
+    @query = params[:query] || params[:city] || params[:country]
 
     end
 
