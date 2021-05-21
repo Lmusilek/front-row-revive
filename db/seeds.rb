@@ -178,13 +178,13 @@ artists.each do |artist|
     event = Event.new(
       event_name: event_name_arr.sample,
       description: "The evening will consist of 9 sets from 15 artists spanning UK rap, hip hop, soul, grime & beyond. Alongside Lex Amor & Project Karnak's, we have exclusive DJ sets from Rei Sky & Rare Treat plus live PA performances from Josette Joseph & Temesgen, Dips & Lo-Wu, Intalekt & Billy Dukes, Ayeisha Raquel, Shumba Maasai x AfronautZu and Shaun Sky.",
-      price_cents: rand(200..1000),
+      price_cents: rand(100..200),
       start_time: DateTime.new(2021, rand(3..9), rand(12..30), rand(1..23)),
       end_time: DateTime.new(2021,6,20,9),
       city: Faker::Address.city,
       currency: "GBP",
       country: country_arr.sample,
-      funding: rand(1..1000),
+      funding: rand(1..100),
       user: artist,
       online: true,
       in_person: true

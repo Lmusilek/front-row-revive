@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get 'nearme', to: 'events#nearme', as: :nearme
 
+  get 'searchcity', to: 'events#searchcity'
+
   get 'search', to: 'events#search'
   post 'order/payment', to: "orders#payment", as: :payment
   post 'order/deposit', to: "orders#deposit", as: :deposit
