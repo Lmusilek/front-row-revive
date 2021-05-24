@@ -57,27 +57,7 @@ h1 {
   // padding: 5px;
   width: 30%;
   background-color: transparent;
-  .menu-content {
-    @include cf;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    li {
-      display: inline-block;
-    }
-    a {
-      color: black;
-    }
-    span {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      font-size: 10px;
-      font-weight: 700;
-      font-family: "Open Sans";
-      transform: translate(-50%, 0);
-    }
-  }
+
   .wrapper {
     background-color: transparent;
     height: 350px;
@@ -87,6 +67,8 @@ h1 {
     &:hover {
       .data {
         transform: translateY(0);
+        background-color: rgba($black, 0.3);
+        box-shadow: 0 5px 30px 10px rgba($black, 0.4);
       }
       filter: brightness(105%);
     }
@@ -106,26 +88,29 @@ h1 {
   .author {
     font-size: 10px;
   }
-  // .title {
-  //   // margin-top: 5px;
-  // }
+  .title {
+    margin: 0px 0px 5px 0px;
+    font-size: larger;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
   .text {
     height: 70px;
     margin: 0;
   }
-  input[type="checkbox"] {
-    display: none;
-  }
-  input[type="checkbox"]:checked + .menu-content {
-    transform: translateY(-60px);
-  }
 }
 
 .country-card {
-  background-color: rgba(0, 0, 0, 0.616);
   padding: 3px;
-  border-radius: 2px;
   color: white;
+  margin-bottom: 5px;
+}
+
+.btn-card {
+  background-color: #6729f9;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  padding: 10px;
 }
 
 // First example styles
@@ -170,90 +155,56 @@ h1 {
       color: lighten($black, 50%);
     }
   }
-  .menu-button {
-    position: absolute;
-    z-index: 999;
-    top: 16px;
-    right: 16px;
-    width: 25px;
-    text-align: center;
-    cursor: pointer;
-    span {
-      width: 5px;
-      height: 5px;
-      background-color: lighten($black, 50%);
-      color: lighten($black, 50%);
-      position: relative;
-      display: inline-block;
-      border-radius: 50%;
-      &::after,
-      &::before {
-        content: "";
-        display: block;
-        width: 5px;
-        height: 5px;
-        background-color: currentColor;
-        position: absolute;
-        border-radius: 50%;
-      }
-      &::before {
-        left: -10px;
-      }
-      &::after {
-        right: -10px;
-      }
-    }
+}
+.menu-content {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  transition: transform 0.3s;
+  transform: translateY(0);
+  li {
+    width: 33.333333%;
+    float: left;
+    background-color: transparent;
+    height: 60px;
+    position: relative;
   }
-  .menu-content {
-    text-align: center;
+  a {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-    transition: transform 0.3s;
-    transform: translateY(0);
-    li {
-      width: 33.333333%;
-      float: left;
-      background-color: transparent;
-      height: 60px;
-      position: relative;
-    }
-    a {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+  }
+  span {
+    top: 10px;
+  }
+  .button {
+    display: block;
+    width: 100px;
+    // margin: 2em auto 1em;
+    text-align: center;
+    font-size: 12px;
+    color: $white;
+    line-height: 1;
+    position: relative;
+    font-weight: 700;
+    &::after {
+      content: "\2192";
+      opacity: 0;
       position: absolute;
+      right: 0;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
+      transform: translate(0, -50%);
+      transition: all 0.3s;
     }
-    span {
-      top: 10px;
-    }
-    .button {
-      display: block;
-      width: 100px;
-      margin: 2em auto 1em;
-      text-align: center;
-      font-size: 12px;
-      color: $white;
-      line-height: 1;
-      position: relative;
-      font-weight: 700;
+    &:hover {
       &::after {
-        content: "\2192";
-        opacity: 0;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(0, -50%);
-        transition: all 0.3s;
-      }
-      &:hover {
-        &::after {
-          transform: translate(5px, -50%);
-          opacity: 1;
-        }
+        transform: translate(5px, -50%);
+        opacity: 1;
       }
     }
   }

@@ -6,18 +6,25 @@
     </div>
   </div>
   <div class="container">
-    <h3>Upcoming Events</h3>
+    <h4>Upcoming Events</h4>
     <p>You searched for '<%= @query %>'. Displaying <%= @events.count %> events.</p>
 
 <div class="row">
-<% @events.each do |event| %>
-      <%# <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
+<%# <% @events.each do |event| %> 
+      <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
       
   <div class="example-1 card">
+  <% if event.photo.attached? %>
     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('<%= cl_image_path event.photo.key %>'); border-radius: 2px">
+    <% else %> 
+     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('https://images.squarespace-cdn.com/content/v1/5c758f8129f2cc2525c7d59d/1557392285208-UK2DCAPICDRAJV8TSXMT/ke17ZwdGBToddI8pDm48kPuCNUDCAcob3LI6jVjYkCIUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcWdXBhdY0oPJbEkIcaLDOPhhWozIm0ZxcbXF04Rv4hfM9kabv37Rdb7-u4BCqR4ia/bucharest_sofar_sounds_photo_bogdan_serban_festnoise.png?format=1000w'); border-radius: 2px">
+      <% end %>
       <div class="date">
-        <%# <div class="flex"> %>
-                    <%= event.start_time.strftime('%e %B %Y') %>
+        <%# <div class="flex"> %> 
+                    <div class="day"><%= event.start_time.strftime('%e') %></div>
+                  
+                    <div class="month"><%= event.start_time.strftime('%b') %></div>
+                    <%# <%= event.start_time.strftime('%Y') %> 
                 <%# </div> %>
       </div>
       <div class="data">
@@ -36,19 +43,13 @@
                    <span class="mr-2" ><%= genre.name %> </span>
                  <% end %>
                </div>
+               <br>
 
                     <%# <p class="title"><%= event.event_name %>
-          <%= link_to 'Read More', event_path(event), :class => "button" %> 
-          <%# <label for="show-menu" class="menu-button"><span></span></label> %>
+          <%= link_to 'Read More', event_path(event), :class => "btn-card" %> 
+   
         </div>
-        <%# <input type="checkbox" id="show-menu" />
-        <ul class="menu-content">
-          <li>
-            <a href="#" class="fa fa-bookmark-o"></a>
-          </li>
-          <li><a href="#" class="fa fa-heart-o"><span>47</span></a></li>
-          <li><a href="#" class="fa fa-comment-o"><span>8</span></a></li>
-        </ul> %>
+     
       </div>
     </div>
   </div>
@@ -56,22 +57,31 @@
   <% end %>
  
 </div>
+</div>
 
   </div>
+  
 <% else %>
 
   <%= render 'shared/banner' %>
   <div class="container">
-  <h3>Upcoming Events</h3>
+  <h4>Global Upcoming Events</h4>
 <div class="row">
 <%# <% @events.each do |event| %> 
       <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
       
   <div class="example-1 card">
+  <% if event.photo.attached? %>
     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('<%= cl_image_path event.photo.key %>'); border-radius: 2px">
+    <% else %> 
+     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('https://images.squarespace-cdn.com/content/v1/5c758f8129f2cc2525c7d59d/1557392285208-UK2DCAPICDRAJV8TSXMT/ke17ZwdGBToddI8pDm48kPuCNUDCAcob3LI6jVjYkCIUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcWdXBhdY0oPJbEkIcaLDOPhhWozIm0ZxcbXF04Rv4hfM9kabv37Rdb7-u4BCqR4ia/bucharest_sofar_sounds_photo_bogdan_serban_festnoise.png?format=1000w'); border-radius: 2px">
+      <% end %>
       <div class="date">
-        <%# <div class="flex"> %>
-                    <%= event.start_time.strftime('%e %B %Y') %>
+        <%# <div class="flex"> %> 
+                    <div class="day"><%= event.start_time.strftime('%e') %></div>
+                  
+                    <div class="month"><%= event.start_time.strftime('%b') %></div>
+                    <%# <%= event.start_time.strftime('%Y') %> 
                 <%# </div> %>
       </div>
       <div class="data">
@@ -90,19 +100,13 @@
                    <span class="mr-2" ><%= genre.name %> </span>
                  <% end %>
                </div>
+               <br>
 
                     <%# <p class="title"><%= event.event_name %>
-          <%= link_to 'Read More', event_path(event), :class => "button" %> 
-          <%# <label for="show-menu" class="menu-button"><span></span></label> %>
+          <%= link_to 'Read More', event_path(event), :class => "btn-card" %> 
+   
         </div>
-        <%# <input type="checkbox" id="show-menu" />
-        <ul class="menu-content">
-          <li>
-            <a href="#" class="fa fa-bookmark-o"></a>
-          </li>
-          <li><a href="#" class="fa fa-heart-o"><span>47</span></a></li>
-          <li><a href="#" class="fa fa-comment-o"><span>8</span></a></li>
-        </ul> %>
+     
       </div>
     </div>
   </div>
@@ -111,4 +115,5 @@
  
 </div>
 <% end %>
+</div>
 </div>

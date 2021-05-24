@@ -23,9 +23,10 @@ class Event < ApplicationRecord
   validates :end_time, presence: true
   validates :city, presence: true
   validates :country, presence: true
+  validates :photo, presence: true
   # validates :funding, presence: true
-  validates :online, presence: true
-  validates :in_person, presence: true
+  validates :time_zone, presence: true
+  validates_presence_of :address, :unless => :online?
   # STRIPE
   monetize :price_cents
 
