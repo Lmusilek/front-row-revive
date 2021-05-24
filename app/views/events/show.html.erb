@@ -15,9 +15,9 @@
 </div>
 <% end %>
 
-<div class ="container">
+<div class="container">
 
-<div class ="body-flex">
+<div class="body-flex">
 
 <div class="flex-left">
 
@@ -38,16 +38,23 @@
 
 <div class="flex-right">
 
-<p><%= @event.city %>, <%= @event.country %></p>
-
 <p><%= @event.start_time.strftime('%A, %b %d') %></p>
 
-<p><%= @event.start_time.strftime('%l:%M %p') %></p>
+<p><%= @event.start_time.strftime('%l:%M %p') %> <%= @event.time_zone %></p>
 
 <p><%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
 
-<p style="color:gray">Please note: all events are currently available to stream worldwide</p>
-
+<% if @event.in_person? && @event.online? %>
+<p><%= @event.address %></p>
+<p><%= @event.city %>, <%= @event.country %></p>
+<p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
+<% elsif @event.in_person? %>
+<p><%= @event.address %></p>
+<p><%= @event.city %>, <%= @event.country %></p>
+<% else %>
+<p><%= @event.city %>, <%= @event.country %></p>
+<p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
+<% end %>
 </br>
   <% if Order.where(event: @event, state: 'paid', user: current_user).any? %>
     <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %>
@@ -65,6 +72,7 @@
     <%= submit_tag 'Buy Ticket', class: 'btn btn-primary' %>
     <% end %>
  <% end %>
+
 
  <%#= form_with url: donate_amount_path do |form| %>
   <%#= form.label :test, "Amount" %>

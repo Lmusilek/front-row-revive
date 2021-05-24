@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   color: white;
   z-index: 10;
   padding-left: 30px;
@@ -20,7 +20,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 150px;
+  width: 160px;
   margin-right: 30px;
 }
 
@@ -75,19 +75,10 @@ a {
   color: rgb(209, 209, 209);
   border: none;
   transition: all 0.2s ease-in-out;
-  padding: 10px 30px;
 }
 
 #search-button:hover {
   color: #6729f9;
-}
-
-.nav-text {
-  padding: 10px 30px;
-  font-weight: lighter;
-  justify-content: center;
-  align-items: center;
-  font-size: smaller;
 }
 
 .nav-items {
@@ -99,10 +90,13 @@ a {
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.15em;
-
   display: inline-block;
-  padding: 15px 20px;
+  padding: 15px 30px 0px 30px;
   position: relative;
+  font-weight: lighter;
+  justify-content: center;
+  align-items: center;
+  font-size: smaller;
 }
 .nav-text:after {
   background: none repeat scroll 0 0 transparent;

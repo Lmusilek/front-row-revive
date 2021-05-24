@@ -20,9 +20,9 @@
               <div class="col-md-6 pr-0"><%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %></div>
             </div>
 
-            <%= f.input :city, label: "City & Country" %>
+            <%= f.input :city, label: "City and Country" %>
             <%= f.country_select :country, priority_countries: ["GB", "US"], html: { autocomplete: 'off' } %>
-             <p class="mt-3 mb-1">Price per Ticket in £</p>
+             <p class="mt-3 mb-1">Price per Ticket</p>
             <%= f.input :price_cents, input_html: { class: 'price-width bootstrap-val-override'}, label: false %>
             <p class="mb-1">Genres</p>
             <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: false %>
