@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   get 'how', to: 'pages#how', as: :how
 
-  get 'how/forartists', :to => 'pages#show', as: :forartists
+  get 'how/forartists', to: 'pages#show', as: :forartists
+
+  get 'apply-artist', to: 'pages#apply-artist', as: :applyartist
+
+  get 'apply-venue', to: 'pages#apply-venue', as: :applyvenue
 
   get 'artists-featured', to: 'pages#artists-featured', as: :artistsfeatured
 
@@ -22,9 +26,11 @@ Rails.application.routes.draw do
   get 'searchcity', to: 'events#searchcity'
 
   get 'search', to: 'events#search'
+
   post 'order/payment', to: "orders#payment", as: :payment
   post 'order/deposit', to: "orders#deposit", as: :deposit
   post 'order/deposit', to: "orders#deposit", as: :donate_amount
+  post 'order/paymentlive', to: "orders#paymentlive", as: :paymentlive
 
   resources :events do
     resources :event_attendees, only: [:create]

@@ -46,6 +46,12 @@ class EventsController < ApplicationController
     @event_genre = params[:event][:genre_ids].reject(&:blank?)
     @event.user = current_user
     @event.price_cents = @event.price_cents * 100
+    @event.price_live  = @event.price_live * 100
+
+    if params[:online].blank?
+    flash[:notice] = "No performance type selected"
+    end
+
     if @event.save
       @event_genre.each do |genre|
         EventGenre.create!(
@@ -142,7 +148,7 @@ class EventsController < ApplicationController
   # PARAMS
 
   def event_params
-    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding, :online, :in_person, :amount, :currency, :time_zone, :address)
+    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding, :online, :in_person, :amount, :currency, :time_zone, :address, :price_live)
   end
   
   end

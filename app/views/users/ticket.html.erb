@@ -11,10 +11,11 @@
               <% if current_user.orders.any? %>
                 <table>
                   <tr class="row-border">
-                    <th class="lable"> Event: </th>
-                    <th class="lable-sm">Date: </th>
-                    <th class="lable-sm">Time: </th>
-                    <th class="lable-sm">Link: </th>
+                    <th class="lable">Event</th>
+                    <th class="lable-sm">Date</th>
+                    <th class="lable-sm">Ticket Type</th>
+                    <th class="lable-sm">Ticket Link</th>
+                    <th class="lable-sm">Event Link</th>
                   </tr>
 
                   <% current_user.orders.each do |event_attendee|  %>
@@ -22,7 +23,9 @@
                     <tr class="row-border">
                       <td><%= event_attendee.event.event_name %></td>
                       <td><%= event_attendee.event.start_time.strftime('%e %B %Y') %></td>
-                      <td><%= event_attendee.event.end_time.strftime('%l:%M %p') %></td>
+                      <td><%= event_attendee.event.online? %></td>
+                      <%# <td><%= event_attendee.event.start_time.strftime('%l:%M %p')</td>  %>
+                      <td><%= link_to 'Link', order_path(event_attendee) %></td>
                       <td><%= link_to 'Link', event_path(event_attendee.event) %></td>
                     </tr>
                     <% end %>

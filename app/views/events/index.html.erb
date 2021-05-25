@@ -32,10 +32,12 @@
           <%# <span class="author"> <p>Hosted by <%= event.user.artist_name %>
           <p class="title"><%= event.user.artist_name %></p>
           
-          <% if event.online? %>
-          <p class="country-card">Streaming from <%= event.country %></p>
-          <% else %>
+          <% if event.online? && event.in_person? %>
           <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <% elsif event.in_person? %>
+          <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <% else %>
+          <p class="country-card">Streaming from <%= event.country %></p>
           <% end %>
 
           <div class="genre-box">
@@ -46,8 +48,8 @@
                <br>
 
                     <%# <p class="title"><%= event.event_name %>
-          <%= link_to 'Read More', event_path(event), :class => "btn-card" %> 
-   
+          <%# <%= link_to 'Read More', event_path(event), :class => "btn-card"  %> 
+        <%= link_to 'Read More', event_path(event) %> 
         </div>
      
       </div>
@@ -95,16 +97,30 @@
           <p class="country-card"><%= event.city %> | <%= event.country %></p>
           <% end %>
 
+             <div class="flex">
+               <% if event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
+
           <div class="genre-box">
                  <% event.genres.each do |genre| %>
                    <span class="mr-2" ><%= genre.name %> </span>
                  <% end %>
                </div>
-               <br>
+              
 
                     <%# <p class="title"><%= event.event_name %>
-          <%= link_to 'Read More', event_path(event), :class => "btn-card" %> 
-   
+          <%= link_to 'Read More', event_path(event), :class => "btn-card"  %>
+  
         </div>
      
       </div>
