@@ -12,11 +12,12 @@
         <li><strong>ORDER STATUS: </strong> <%= @order.state %></li>
         <li><strong>ISSUED ON: </strong> <%= @order.created_at.to_date %></li>
         <li><strong>EVENT: </strong> <%= @order.event.event_name %> [<%= @order.event_sku %>]</li>
+        <%# <li><strong>TICKET QUANTITY: </strong> <%= @order.adjustable_quantity %>
         <li><strong>TOTAL: </strong> <%= humanized_money_with_symbol @order.amount %></li>
         </li>
       </ul>
 
-      <h3>Share this event</h3>
+      <h4>Share this event</h4>
 
        <!-- AddToAny BEGIN -->
 <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-title="FrontRow">
@@ -28,6 +29,6 @@
 
 <script async src="https://static.addtoany.com/menu/page.js"></script>
 <!-- AddToAny END -->
-
+<br>
   <%= link_to "Go to stream", room_path(@order.event.room), class: "btn btn-success"  %>
 </div>

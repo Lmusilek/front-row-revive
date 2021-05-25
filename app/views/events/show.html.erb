@@ -42,44 +42,58 @@
 
 <p><%= @event.start_time.strftime('%l:%M %p') %> <%= @event.time_zone %></p>
 
-<p><%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
-
 <% if @event.in_person? && @event.online? %>
+<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
+<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
 <p><%= @event.address %></p>
 <p><%= @event.city %>, <%= @event.country %></p>
 <p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+    Buy Tickets
+    </button>
+
+
 <% elsif @event.in_person? %>
+<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
 <p><%= @event.address %></p>
 <p><%= @event.city %>, <%= @event.country %></p>
+   <%= form_tag paymentlive_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Tickets', class: 'btn btn-primary' %>
+    <% end %>
+
+
 <% else %>
+<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
 <p><%= @event.city %>, <%= @event.country %></p>
 <p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
-<% end %>
-</br>
-  <% if Order.where(event: @event, state: 'paid', user: current_user).any? %>
-    <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %>
-    <% elsif @event.user == current_user %>
-    <%= link_to "Start Stream", room_path(@event.room), class: 'btn btn-primary' %>
-    <%# elsif @event.funding.present? %>
-    <%#= form_tag deposit_path do %>
-    <%#= text_field_tag(:amount) %>
-    <%#= hidden_field_tag 'event_id', @event.id %>
-    <%#= submit_tag 'Donate', class: 'btn btn-primary' %>
-    <%# end %>
-    <% else %>
-    <%= form_tag payment_path do %>
+ <%= form_tag payment_path do %>
     <%= hidden_field_tag 'event_id', @event.id %>
     <%= submit_tag 'Buy Ticket', class: 'btn btn-primary' %>
     <% end %>
- <% end %>
+<% end %>
+</br>
+  <%# <% if Order.where(event: @event, state: 'paid', user: current_user).any? %> 
+    <%# <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %> 
+    <%# <% elsif @event.user == current_user %> 
+    <%# <%= link_to "Start Stream", room_path(@event.room), class: 'btn btn-primary' %> 
+    <%# <% elsif @event.funding.present? %>
+    <%# <%= form_tag deposit_path do %> 
+    <%# <%= text_field_tag(:amount) %> 
+    <%# <%= hidden_field_tag 'event_id', @event.id %> 
+    <%# <%= submit_tag 'Donate', class: 'btn btn-primary' %>
+    <%# <% end %> 
+    <%# <% else %> 
+  
+ <%# <% end %>
 
 
- <%#= form_with url: donate_amount_path do |form| %>
-  <%#= form.label :test, "Amount" %>
-  <%#= form.text_field :amount %>
-  <%#= hidden_field_tag 'event_id', @event.id %>
-  <%#= form.submit "Donate" %>
-<%# end %>
+ <%# <%= form_with url: donate_amount_path do |form| %> 
+  <%# <%= form.label :test, "Amount" %> 
+  <%# <%= form.text_field :amount %>
+  <%# <%= hidden_field_tag 'event_id', @event.id %> 
+  <%# <%= form.submit "Donate" %> 
+<%# <% end %> 
 </div>
 
     <%# <div class="col-xl-3 col-lg-6 mb-4">
@@ -102,5 +116,42 @@
       <%# </div> %>
     <%# </div> %>
 
+</div>
+</div>
+
+<!-- Modal -->
+<div class="event-modal">
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pick your ticket type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ul>
+      <li>Live (in person) ticket <p><%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
+       <%= form_tag paymentlive_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Live Show Ticket', class: 'btn btn-primary' %>
+    <% end %>
+        </li>
+
+       <li>Online (live stream) ticket <p><%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+             <%= form_tag payment_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Live Stream Ticket', class: 'btn btn-primary' %>
+    <% end %>
+        </li> 
+        </ul>
+      </div>
+      <div class="modal-footer">
+      
+         
+      </div>
+    </div>
+  </div>
 </div>
 </div>

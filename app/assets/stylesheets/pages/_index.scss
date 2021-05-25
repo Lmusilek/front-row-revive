@@ -107,10 +107,12 @@ h1 {
 }
 
 .btn-card {
-  background-color: #6729f9;
-  border-radius: 5px;
   color: rgb(255, 255, 255);
-  padding: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.btn-card:hover {
+  font-weight: bolder;
 }
 
 // First example styles

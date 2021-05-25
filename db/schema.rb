@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_105400) do
+ActiveRecord::Schema.define(version: 2021_05_25_112907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_105400) do
     t.boolean "in_person"
     t.string "time_zone", limit: 255, default: "UTC"
     t.string "address"
+    t.integer "price_live", default: 0, null: false
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
