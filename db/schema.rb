@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
-    t.text "description"
+    t.text "description", limit: 600
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "city"
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
     t.date "dob"
     t.boolean "artist", default: false
     t.string "artist_name"
-    t.text "bio"
+    t.text "bio", limit: 600
     t.string "bank_details"
     t.string "facebook"
     t.string "instagram"
