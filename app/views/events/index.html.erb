@@ -33,11 +33,11 @@
           <p class="title"><%= event.user.artist_name %></p>
           
           <% if event.online? && event.in_person? %>
-          <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <p class="country-card"><%= event.city %> | <%= event.country_name %></p>
           <% elsif event.in_person? %>
-          <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <p class="country-card"><%= event.city %> | <%= event.country_name %></p>
           <% else %>
-          <p class="country-card">Streaming from <%= event.country %></p>
+          <p class="country-card">Streaming from <%= event.country_name %></p>
           <% end %>
 
           <div class="genre-box">
@@ -92,7 +92,7 @@
           <p class="title"><%= event.user.artist_name %></p>
           
           <% if event.online? %>
-          <p class="country-card">Streaming from <%= event.country %></p>
+          <p class="country-card">Streaming from <%= event.country.name %></p>
           <% else %>
           <p class="country-card"><%= event.city %> | <%= event.country %></p>
           <% end %>

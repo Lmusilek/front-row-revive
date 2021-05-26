@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
-    t.text "description", limit: 600
+    t.text "description"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "city"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
     t.boolean "in_person"
     t.string "time_zone", limit: 255, default: "UTC"
     t.string "address"
-    t.integer "price_live", default: 0, null: false
+    t.integer "price_live"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
     t.date "dob"
     t.boolean "artist", default: false
     t.string "artist_name"
-    t.text "bio", limit: 600
+    t.text "bio"
     t.string "bank_details"
     t.string "facebook"
     t.string "instagram"
