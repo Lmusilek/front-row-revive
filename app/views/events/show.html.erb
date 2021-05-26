@@ -44,7 +44,8 @@
 
 <% if @event.in_person? && @event.online? %>
 <p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
-<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_cents
+.to_s, :gbp) %></p>
 <p><%= @event.address %></p>
 <p><%= @event.city %>, <%= @event.country %></p>
 <p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
