@@ -55,19 +55,24 @@
 
 // STREAMING VIDEO STYLES
 
-// #videos {
-//   display: grid;
-//   grid-template-columns: repeat(3, minmax(0, 1fr));
-//   // gap: 1rem;
-// }
+#videos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  // gap: 1rem;
+}
 
-// .OT_root {
-//   height: 550px !important;
-// }
+.OT_root {
+  height: 550px !important;
+}
 
-// .OT_publisher .OT_video-element {
-//   padding: 20px;
-// }
+.OT_publisher .OT_video-element {
+  padding: 20px;
+}
+
+.OT_publisher .OT_mute,
+.OT_subscriber .OT_mute {
+  top: 50px;
+}
 
 // .showtime {
 //   font-weight: bold;
