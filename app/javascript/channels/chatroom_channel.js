@@ -27,8 +27,6 @@ const initChatroomCable = () => {
       }
     );
   }
-
-  // Entering Messages Function On keyup("Enter") removes input text and scrollchat
 };
 
 export { initChatroomCable };
