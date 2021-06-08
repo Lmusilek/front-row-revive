@@ -9,6 +9,7 @@
 
 require "open-uri"
 require "faker"
+require 'resolv-replace'
 
 puts "Running seed..."
 puts "Destorying tables..."
@@ -74,29 +75,29 @@ event_name14 = "Lose Yourself To Dance"
 
 event_name_arr = [event_name1, event_name2, event_name3, event_name4, event_name5, event_name6, event_name7, event_name8, event_name9, event_name10, event_name11, event_name12, event_name13, event_name14]
 
-country1 = "France 🇫🇷"
-country2 = "Australia 🇦🇺"
-country3 = "Czech Republic 🇨🇿"
-country4 = "United Kingdom 🇬🇧"
-country5 = "South Africa 🇿🇦"
-country6 = "Italy 🇮🇹"
-country7 = "Portugal 🇵🇹"
-country8 = "Spain 🇪🇸"
-country9 = "United States 🇺🇸"
-country10 = "Canada 🇨🇦"
-country11 = "Ireland 🇮🇪"
-country12 = "Greece 🇬🇷"
-country13 = "Sweden 🇸🇪"
-country14 = "South Korea 🇰🇷"
-country15 = "Canary Islands 🇮🇨"
-country16 = "Philippines 🇵🇭"
-country17 = "United Arab Emirates 🇦🇪"
-country18 = "Latvia 🇱🇻"
-country19 = "Japan 🇯🇵"
-country20 = "Russia 🇷🇺"
+# country1 = "France 🇫🇷"
+# country2 = "Australia 🇦🇺"
+# country3 = "Czech Republic 🇨🇿"
+# country4 = "United Kingdom 🇬🇧"
+# country5 = "South Africa 🇿🇦"
+# country6 = "Italy 🇮🇹"
+# country7 = "Portugal 🇵🇹"
+# country8 = "Spain 🇪🇸"
+# country9 = "United States 🇺🇸"
+# country10 = "Canada 🇨🇦"
+# country11 = "Ireland 🇮🇪"
+# country12 = "Greece 🇬🇷"
+# country13 = "Sweden 🇸🇪"
+# country14 = "South Korea 🇰🇷"
+# country15 = "Canary Islands 🇮🇨"
+# country16 = "Philippines 🇵🇭"
+# country17 = "United Arab Emirates 🇦🇪"
+# country18 = "Latvia 🇱🇻"
+# country19 = "Japan 🇯🇵"
+# country20 = "Russia 🇷🇺"
 
 
-country_arr =[country1, country2, country3, country4, country5, country6, country7, country8, country9, country10, country11, country12, country13, country14, country15, country16, country17, country18, country19, country20]
+# country_arr =[country1, country2, country3, country4, country5, country6, country7, country8, country9, country10, country11, country12, country13, country14, country15, country16, country17, country18, country19, country20]
 
 
 puts "Creating artists..."
@@ -178,14 +179,15 @@ artists.each do |artist|
     event = Event.new(
       event_name: event_name_arr.sample,
       description: "The evening will consist of 9 sets from 15 artists spanning UK rap, hip hop, soul, grime & beyond. Alongside Lex Amor & Project Karnak's, we have exclusive DJ sets from Rei Sky & Rare Treat plus live PA performances from Josette Joseph & Temesgen, Dips & Lo-Wu, Intalekt & Billy Dukes, Ayeisha Raquel, Shumba Maasai x AfronautZu and Shaun Sky.",
-      price_cents: rand(100..200),
+      price_cents: rand(5000..20000),
+      price_live: rand(3000..10000),
       start_time: DateTime.new(2021, rand(3..9), rand(12..30), rand(1..23)),
       end_time: DateTime.new(2021,6,20,9),
       city: Faker::Address.city,
-      currency: Faker::Currency.code,
+      currency: "ZAR",
       # country: country_arr.sample,
       country: Faker::Address.country_code,
-      funding: rand(1..100),
+      # funding: rand(1..100),
       user: artist,
       online: true,
       in_person: true

@@ -30,25 +30,27 @@
 
               <% @events.each_with_index do |event, index| %>
                 <div class="container stats_box <%= "d-none" unless index == 0 %> " data-stats="stats_<%= event.id %>">
-                  <div class="row p-3">
+                  <%# <div class="row p-3"> %>
                     <%# <div class="col-md-9 p-3">
                         <%= line_chart UserView.where(event_id: event).group_by_day(:created_at).count, id: "line_chart#{index}" %>
                     <%# </div> %> 
-                    
-                    <div class="col-md-3 p-3">
                     <p><%= event.event_name %></p>
+                    <div class="col-md-3 p-3">
+      
                       <div class="align-middle d-flex justify-content-center align-items-center h-50 p-3 grey-border-bottom">
+                        <div class="text-center">
+                        <p><strong>Total Sales</strong></p>
+                          <%=(Order.where(event_id: event).count) %>
+                        </div>
+                        </div>
+                        <div class="align-middle d-flex justify-content-center align-items-center h-50 p-3 grey-border-bottom">
                         <div class="text-center">
                           <p><strong>Total Income</strong></p>
                           £<%= Money.new((event.price_cents)*(Order.where(event_id: event).count),:gbp) %>
                         </div>
                       </div>
-                      <div class="align-middle d-flex justify-content-center align-items-center h-50 p-3 ">
-                       <div class="text-center">
-                        <p><strong>Total Sales</strong></p>
-                          <%=(Order.where(event_id: event).count) %>
-                        </div>
-                      </div>
+       
+                      <%# </div> %>
                     </div>
                  </div>
 
