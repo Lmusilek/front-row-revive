@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'how', to: 'pages#how', as: :how
 
-  get 'how/forartists', to: 'pages#show', as: :forartists
+  get 'contact', to: 'pages#contact', as: :contact
 
   get 'apply-artist', to: 'pages#apply-artist', as: :applyartist
 

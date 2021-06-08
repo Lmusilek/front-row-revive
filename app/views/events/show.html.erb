@@ -22,17 +22,36 @@
 <div class="flex-left">
 
 <h1><%= @event.event_name %></h1>
-<br>
-<h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %>Hosted by <%= link_to @event.user.artist_name, profile_path(@event.user_id) %></h5>
+<p><div class="flex">
+               <% if @event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if @event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
+</p>
+<%# <h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %> 
+<%# Hosted by <%= link_to @event.user.artist_name, profile_path(@event.user_id) %>
+<%# </h5> %>
+<h4>Featured Artists</h4>
+<h5><%= cl_image_tag 'https://texxandthecity.com/wp-content/uploads/2020/11/Painted-Flowers-1.png', class: "avatar-event" %><%= link_to 'Painted Flowers', profile_path(125) %></h5>
+<h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %><%= link_to @event.user.artist_name, profile_path(@event.user_id) %></h5>
+
+
 </br>
 <h4>Event Description</h4>
 
 <p><%= @event.description %></p>
 </br>
-<h4>About the artist</h4>
+<%# <h4>About the artist</h4>
 
-
-<p><%= @event.user.bio %></p>
+<p><%= @event.user.bio %>
 
 </div>
 
@@ -43,11 +62,11 @@
 <p><%= @event.start_time.strftime('%l:%M %p') %> <%= @event.time_zone %></p>
 
 <% if @event.in_person? && @event.online? %>
+<p><%= @event.address %></p>
+<p><%= @event.city %>, <%= @event.country %></p>
 <p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
 <p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_cents
 .to_s, :gbp) %></p>
-<p><%= @event.address %></p>
-<p><%= @event.city %>, <%= @event.country %></p>
 <p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
     Buy Tickets
@@ -55,9 +74,9 @@
 
 
 <% elsif @event.in_person? %>
-<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
 <p><%= @event.address %></p>
 <p><%= @event.city %>, <%= @event.country %></p>
+<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
    <%= form_tag paymentlive_path do %>
     <%= hidden_field_tag 'event_id', @event.id %>
     <%= submit_tag 'Buy Tickets', class: 'btn btn-primary' %>
@@ -65,8 +84,8 @@
 
 
 <% else %>
+<p>Streaming from <%= @event.city %>, <%= @event.country %></p>
 <p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
-<p><%= @event.city %>, <%= @event.country %></p>
 <p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
  <%= form_tag payment_path do %>
     <%= hidden_field_tag 'event_id', @event.id %>
@@ -156,3 +175,5 @@
   </div>
 </div>
 </div>
+
+<div class="container">

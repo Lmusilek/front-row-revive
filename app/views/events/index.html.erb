@@ -7,11 +7,11 @@
   </div>
   <div class="container">
     <h4>Upcoming Events</h4>
-    <p>You searched for '<%= @query %>'. Displaying <%= @events.count %> events.</p>
+    <p>You searched for '<%= @query %>'.</p>
 
 <div class="row">
-<%# <% @events.each do |event| %> 
-      <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
+<% @events.each do |event| %>
+      <%# <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.each do |event| %> 
       
   <div class="example-1 card">
   <% if event.photo.attached? %>
@@ -32,24 +32,36 @@
           <%# <span class="author"> <p>Hosted by <%= event.user.artist_name %>
           <p class="title"><%= event.user.artist_name %></p>
           
-          <% if event.online? && event.in_person? %>
-          <p class="country-card"><%= event.city %> | <%= event.country_name %></p>
-          <% elsif event.in_person? %>
-          <p class="country-card"><%= event.city %> | <%= event.country_name %></p>
+          <% if event.online? %>
+          <p class="country-card">Streaming from <%= event.country %></p>
           <% else %>
-          <p class="country-card">Streaming from <%= event.country_name %></p>
+          <p class="country-card"><%= event.city %> | <%= event.country %></p>
           <% end %>
+
+             <div class="flex">
+               <% if event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
 
           <div class="genre-box">
                  <% event.genres.each do |genre| %>
                    <span class="mr-2" ><%= genre.name %> </span>
                  <% end %>
                </div>
-               <br>
+              
 
                     <%# <p class="title"><%= event.event_name %>
-          <%# <%= link_to 'Read More', event_path(event), :class => "btn-card"  %> 
-        <%= link_to 'Read More', event_path(event) %> 
+          <%= link_to 'Read More', event_path(event), :class => "btn-card"  %>
+  
         </div>
      
       </div>
@@ -92,7 +104,7 @@
           <p class="title"><%= event.user.artist_name %></p>
           
           <% if event.online? %>
-          <p class="country-card">Streaming from <%= event.country.name %></p>
+          <p class="country-card">Streaming from <%= event.country %></p>
           <% else %>
           <p class="country-card"><%= event.city %> | <%= event.country %></p>
           <% end %>
@@ -133,3 +145,4 @@
 <% end %>
 </div>
 </div>
+
