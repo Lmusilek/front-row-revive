@@ -6,75 +6,143 @@
     </div>
   </div>
   <div class="container">
-    <h3>Upcoming Events</h3>
-    <p>You searched for '<%= @query %>'. Displaying <%= @events.count %> events.</p>
-    <div class="row">
-      <% @events.each do |event| %>
-        <%= link_to event_path(event) do %>
-          <div class="col-4">
-            <div class="event-card">
-              <% if event.photo.attached? %>
-                <div class="event-card-image" style="background-image: url('<%= cl_image_path event.photo.key %>')"></div>
-              <% else %>
-                <div class="event-card-image" style="background-image: url(<%= 'https://static.billboard.com/files/2020/12/chloe-x-halle-tiny-desk-2020-billboard-1548-1607458577-compressed.jpg' %>)"></div>
-              <% end %>
-              <div class="event-card-content">
-                <div class="event-card-title">
-                  <h4><%= event.event_name %></h4>
-                  <p>Hosted by <%= event.user.artist_name %></p>
-                </div>
-                <div class="flex">
-                  <%= event.country %>  |  <%= event.start_time.strftime('%e %B %Y') %>  |  <%= event.start_time.strftime('%l:%M %p') %>
-                </div>
-                <%# <p>£<%= Money.new(event.price_cents.to_s, :gbp) %>
-                <div class="genre-box">
-                  <% event.genres.each do |genre| %>
-                    <span class="mr-2" ><%= genre.name %> </span>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
+    <h4>Upcoming Events</h4>
+    <p>You searched for '<%= @query %>'.</p>
+
+<div class="row">
+<% @events.each do |event| %>
+      <%# <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.each do |event| %> 
+      
+  <div class="example-1 card">
+  <% if event.photo.attached? %>
+    <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('<%= cl_image_path event.photo.key %>'); border-radius: 2px">
+    <% else %> 
+     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('https://images.squarespace-cdn.com/content/v1/5c758f8129f2cc2525c7d59d/1557392285208-UK2DCAPICDRAJV8TSXMT/ke17ZwdGBToddI8pDm48kPuCNUDCAcob3LI6jVjYkCIUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcWdXBhdY0oPJbEkIcaLDOPhhWozIm0ZxcbXF04Rv4hfM9kabv37Rdb7-u4BCqR4ia/bucharest_sofar_sounds_photo_bogdan_serban_festnoise.png?format=1000w'); border-radius: 2px">
       <% end %>
+      <div class="date">
+        <%# <div class="flex"> %> 
+                    <div class="day"><%= event.start_time.strftime('%e') %></div>
+                  
+                    <div class="month"><%= event.start_time.strftime('%b') %></div>
+                    <%# <%= event.start_time.strftime('%Y') %> 
+                <%# </div> %>
+      </div>
+      <div class="data">
+        <div class="content">
+          <%# <span class="author"> <p>Hosted by <%= event.user.artist_name %>
+          <p class="title"><%= event.user.artist_name %></p>
+          
+          <% if event.online? %>
+          <p class="country-card">Streaming from <%= event.country %></p>
+          <% else %>
+          <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <% end %>
+
+             <div class="flex">
+               <% if event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
+
+          <div class="genre-box">
+                 <% event.genres.each do |genre| %>
+                   <span class="mr-2" ><%= genre.name %> </span>
+                 <% end %>
+               </div>
+              
+
+                    <%# <p class="title"><%= event.event_name %>
+          <%= link_to 'Read More', event_path(event), :class => "btn-card"  %>
+  
+        </div>
+     
+      </div>
     </div>
   </div>
+
+  <% end %>
+ 
+</div>
+</div>
+
+  </div>
+  
 <% else %>
+
   <%= render 'shared/banner' %>
   <div class="container">
-    <h3>Upcoming Events</h3>
-    <p>Displaying <%= @events.count %> events.</p>
-    <div class="row">
-      <% @events.each do |event| %>
-        <%= link_to event_path(event) do %>
-          <div class="col-4">
-            <div class="event-card">
-              <% if event.photo.attached? %>
-                <div class="event-card-image" style="background-image: url('<%= cl_image_path event.photo.key %>')"></div>
-              <% else %>
-                <div class="event-card-image" style="background-image: url(<%= 'https://static.billboard.com/files/2020/12/chloe-x-halle-tiny-desk-2020-billboard-1548-1607458577-compressed.jpg' %>)"></div>
-              <% end %>
-              <div class="event-card-content">
-                <div class="event-card-title">
-                  <h4><%= event.event_name %></h4>
-                  <p>Hosted by <%= event.user.artist_name %></p>
-                </div>
-                <div class="flex">
-                  <%= event.country %>  |  <%= event.start_time.strftime('%e %B %Y') %>  |  <%= event.start_time.strftime('%l:%M %p') %>
-                </div>
-                <%# <p>£<%= Money.new(event.price_cents.to_s, :gbp) %>
-                <div class="genre-box">
-                  <% event.genres.each do |genre| %>
-                    <span class="mr-2" ><%= genre.name %> </span>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
+  <h4>Global Upcoming Events</h4>
+<div class="row">
+<%# <% @events.each do |event| %> 
+      <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
+      
+  <div class="example-1 card">
+  <% if event.photo.attached? %>
+    <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('<%= cl_image_path event.photo.key %>'); border-radius: 2px">
+    <% else %> 
+     <div class="wrapper" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.5)), url('https://images.squarespace-cdn.com/content/v1/5c758f8129f2cc2525c7d59d/1557392285208-UK2DCAPICDRAJV8TSXMT/ke17ZwdGBToddI8pDm48kPuCNUDCAcob3LI6jVjYkCIUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcWdXBhdY0oPJbEkIcaLDOPhhWozIm0ZxcbXF04Rv4hfM9kabv37Rdb7-u4BCqR4ia/bucharest_sofar_sounds_photo_bogdan_serban_festnoise.png?format=1000w'); border-radius: 2px">
       <% end %>
+      <div class="date">
+        <%# <div class="flex"> %> 
+                    <div class="day"><%= event.start_time.strftime('%e') %></div>
+                  
+                    <div class="month"><%= event.start_time.strftime('%b') %></div>
+                    <%# <%= event.start_time.strftime('%Y') %> 
+                <%# </div> %>
+      </div>
+      <div class="data">
+        <div class="content">
+          <%# <span class="author"> <p>Hosted by <%= event.user.artist_name %>
+          <p class="title"><%= event.user.artist_name %></p>
+          
+          <% if event.online? %>
+          <p class="country-card">Streaming from <%= event.country %></p>
+          <% else %>
+          <p class="country-card"><%= event.city %> | <%= event.country %></p>
+          <% end %>
+
+             <div class="flex">
+               <% if event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
+
+          <div class="genre-box">
+                 <% event.genres.each do |genre| %>
+                   <span class="mr-2" ><%= genre.name %> </span>
+                 <% end %>
+               </div>
+              
+
+                    <%# <p class="title"><%= event.event_name %>
+          <%= link_to 'Read More', event_path(event), :class => "btn-card"  %>
+  
+        </div>
+     
+      </div>
     </div>
   </div>
-<% end %>
 
+  <% end %>
+ 
+</div>
+<% end %>
+</div>
+</div>
 

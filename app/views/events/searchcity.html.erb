@@ -1,0 +1,48 @@
+<div class="banner-small" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1503507035555-bcdb0ef0ccbc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fG11c2ljaWFuc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);">
+  <div class="container">
+    <h1>Search events near you</h1>
+  </div>
+</div>
+
+<div class="container">
+  <% if @events.empty? %>
+    <h2 class="results-search"><%= 'There are no events in your city right now :('%> <a href="/nearme">Search Again</a> </h2>
+
+  <% else %>
+<div class="flex">
+
+ <div class="col-md-6">
+        <div class="sorted-table" id="event-genre">
+          <% unless @events.empty? %>
+          <h3>Cities</h3>
+            <hr>
+            <ul>
+              <% @events.each do |event| %>
+                <li><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).city}", events_path(city: event.searchable_type.constantize.find(event.searchable_id).city, search: true) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="sorted-table" id="event-genre">
+          <% unless @events.empty? %>
+            <h3>Countries</h3>
+            <hr>
+              <ul>
+                <% @events.each do |event| %>
+                  <li><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).country}", events_path(country: event.searchable_type.constantize.find(event.searchable_id).country, search: true) %></li>
+                <% end %>
+              </ul>
+          <% end %>
+        </div>
+      </div>
+    
+    
+  
+     
+   
+  <% end %>
+</div>
+</div>

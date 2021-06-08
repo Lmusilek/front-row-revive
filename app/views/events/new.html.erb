@@ -1,27 +1,49 @@
-<div class="banner-small" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url(https://diymusician.cdbaby.com/wp-content/uploads/2016/12/studio-image-diy-blog.jpeg);">
-  <div class="container">
-    <h1>Create a new event</h1>
-  </div>
-</div>
+<div class="container">
+  <div class="row p-5">
+    <div class="account-container">
 
-<div class="container rounded" style="width: 900px;">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <%= simple_form_for (@event) do |f| %>
-        <%= f.input :event_name, input_html: { class: "nice-class", maxlength: 50 } %>
-        <%= f.label :Description %>
-        <%= f.rich_text_area :description, input_html: { maxlength: 150 } %>
-        <%= f.input :start_time, as: :string, required: true, input_html: {class: "datepicker"} %>
-        <%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %>
-        <%= f.input :city %>
-        <%= f.country_select :country, priority_countries: ["GB", "US"] %>
-        <%= f.input :price_cents, label: "Price per Ticket in £" %>
-        <%= f.input :funding, label: "Crowd Funding Target" %>
-        <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: "Select your Genre" %>
-        <%= f.input :photo, as: :file %>
-        <%= f.submit 'Add your Event', class: 'btn btn-primary' %>
-      <% end %>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+    <%= render "users/partial/tabs" %>
+
+      <div id="Account Overview" class="tabcontent">
+        <div class="row p-5">
+          <div class="col-md-12">
+            <h2>New Event</h2>
+              <%= simple_form_for (@event) do |f| %>
+                <%= f.input :event_name, input_html: { class: "nice-class", maxlength: 50 } %>
+                <%= f.label :Description %>
+                <%= f.rich_text_area :description, input_html: { maxlength: 600 } %>
+                  <label class="flex switch switch-primary">
+        <%= f.label :Online_show? %>
+        <%= f.input :online, label: false, as: :boolean, class: 'form-control' %>
+        </label>
+        <label class="flex switch switch-primary">
+        <%= f.label :In_person_show? %>
+        <%= f.input :in_person, label: false, as: :boolean, class: 'form-control' %>
+        </label>
+                <%= f.time_zone_select :time_zone %>
+                <%= f.input :start_time, as: :string, required: true, input_html: {class: "datepicker"} %>
+                <%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %>
+                <%= f.input :address, hint: "Leave it blank if the event is live streamed"%>
+                <%= f.input :city %>
+                <%= f.label :Country %><br>
+                <%= f.country_select :country, priority_countries: ["GB", "US"] %>
+                <%= f.input :price_cents, label: "Price per Ticket" %>
+                 <%= f.input :price_live, label: "Price per live show ticket", hint: "Leave it blank if the event is live streamed" %>
+                <%= f.currency_select(:currency, ["USD", "EUR", "GBP", "ZAR"], {}, {class: "form-control"}) -%>
+                <%# <%= f.input :funding, label: "Crowd Funding Target" %> 
+                <%= f.association :genres, multiple: true, size: 3, input_html: { class: 'select2'}, label: "Select Genres" %>
+                 <%= f.input :photo, as: :file, input_html: { class: "d-none" }, label_html: { class: 'upload-photo'}, label:  "📷 Upload a photo" %>
+                <%= f.submit 'Add Event', class: 'btn btn-primary' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
- </div>
+</div>
 

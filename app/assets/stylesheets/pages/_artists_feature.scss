@@ -1,0 +1,16 @@
+.feature-artist-bio {
+  margin: 10px 30px;
+}
+
+.feature-artist-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 2px;
+  object-fit: cover;
+  transition: 200ms;
+}
+
+.feature-artist-image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}

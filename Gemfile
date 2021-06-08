@@ -75,11 +75,10 @@ gem "opentok", "~> 4.2"
 gem 'pg_search', '~> 2.3.0'
 
 gem 'cloudinary', '~> 1.16.0'
-gem 'dotenv-rails', groups: [:development, :test]
 gem "http"
 gem "chartkick"
 gem 'groupdate'
 
 gem 'rspotify'
 gem 'redis'
-
+gem 'currency_select'

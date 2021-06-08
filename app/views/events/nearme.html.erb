@@ -1,0 +1,72 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1503507035555-bcdb0ef0ccbc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fG11c2ljaWFuc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);">
+  <div class="container">
+    <h1>Find events near you</h1>
+      
+        <div class="form-city">
+          <%= form_tag nearme_path, method: :get do %>
+            <%= text_field_tag :query,
+              params[:query],
+              id: "form-city",
+              placeholder: "Enter your city" %>
+
+         <div class="button"><%= submit_tag "Search", class: "btn btn-primary form-city-btn" %>
+          <% end %>
+        </div>
+        </div>
+
+  </div>
+</div>
+
+ 
+
+<% if @query %>
+ <div class="container">
+  <% if @events.empty? %> 
+     <h2>There are no events in your city right now :(</h2> 
+     <p> Get added to our mailing list to find out when we launch events there.</p> 
+       <div class="form-city">
+          <%= form_tag events_path, method: :get do %>
+            <%= text_field_tag :query,
+              params[:query],
+              id: "form-city",
+              placeholder: "Enter your email" %>
+
+         <div class="button"><%= submit_tag "Submit", class: "btn btn-primary" %>
+          <% end %>
+
+    
+  <% end %> 
+<div class="flex">
+
+ <div class="col-md-6">
+        <div class="sorted-table" id="event-genre">
+          <% unless @events.empty? %>
+          <h3>Cities</h3>
+            <hr>
+            <ul>
+              <% @events.each do |event| %>
+                <li><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).city}", events_path(city: event.searchable_type.constantize.find(event.searchable_id).city, search: true) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="sorted-table" id="event-genre">
+          <% unless @events.empty? %>
+            <h3>Countries</h3>
+            <hr>
+              <ul>
+                <% @events.each do |event| %>
+                  <li><%= link_to "#{event.searchable_type.constantize.find(event.searchable_id).country}", events_path(country: event.searchable_type.constantize.find(event.searchable_id).country, search: true) %></li>
+                <% end %>
+              </ul>
+          <% end %>
+        </div>
+      </div>
+
+</div>
+
+</div> 
+  <% end %>

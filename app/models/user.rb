@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true
+  validates :bio,  length: {maximum: 600}
 
   #PG Search
   include PgSearch::Model

@@ -15,70 +15,165 @@
 </div>
 <% end %>
 
-<div class ="container">
+<div class="container">
 
-<div class ="body-flex">
+<div class="body-flex">
 
 <div class="flex-left">
 
 <h1><%= @event.event_name %></h1>
-<br>
-<h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %>Hosted by <%= link_to @event.user.artist_name, profile_path(@event.user_id) %></h5>
+<p><div class="flex">
+               <% if @event.online %>
+                  <div class="online-box">
+                   <span class="mr-2" >Live Stream</span>
+               </div>
+               <% end %>
+ 
+                  <% if @event.in_person %>
+                  <div class="live-box">
+                   <span class="mr-2" >Live Show</span>
+               </div>
+               <% end %>
+               </div>
+</p>
+<%# <h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %> 
+<%# Hosted by <%= link_to @event.user.artist_name, profile_path(@event.user_id) %>
+<%# </h5> %>
+<h4>Featured Artists</h4>
+<h5><%= cl_image_tag 'https://texxandthecity.com/wp-content/uploads/2020/11/Painted-Flowers-1.png', class: "avatar-event" %><%= link_to 'Painted Flowers', profile_path(125) %></h5>
+<h5><%= cl_image_tag @event.user.photo.key, class: "avatar-event" %><%= link_to @event.user.artist_name, profile_path(@event.user_id) %></h5>
+
+
 </br>
 <h4>Event Description</h4>
 
 <p><%= @event.description %></p>
 </br>
-<h4>About the artist</h4>
+<%# <h4>About the artist</h4>
 
-
-<p><%= @event.user.bio %></p>
+<p><%= @event.user.bio %>
 
 </div>
 
 <div class="flex-right">
 
-<p><%= @event.city %>, <%= @event.country %></p>
-
 <p><%= @event.start_time.strftime('%A, %b %d') %></p>
 
-<p><%= @event.start_time.strftime('%l:%M %p') %></p>
+<p><%= @event.start_time.strftime('%l:%M %p') %> <%= @event.time_zone %></p>
 
-<p>£<%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+<% if @event.in_person? && @event.online? %>
+<p><%= @event.address %></p>
+<p><%= @event.city %>, <%= @event.country %></p>
+<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
+<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_cents
+.to_s, :gbp) %></p>
+<p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+    Buy Tickets
+    </button>
 
-<p style="color:gray">Please note: all events are currently available to stream worldwide</p>
 
-</br>
-  <% if Order.where(event: @event, state: 'paid', user: current_user).any? %>
-    <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %>
-    <% elsif @event.user == current_user %>
-    <%= link_to "Start Stream", room_path(@event.room), class: 'btn btn-primary' %>
-    <% else %>
-    <%= form_tag payment_path do %>
+<% elsif @event.in_person? %>
+<p><%= @event.address %></p>
+<p><%= @event.city %>, <%= @event.country %></p>
+<p>Live Show: <%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+   <%= form_tag paymentlive_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Tickets', class: 'btn btn-primary' %>
+    <% end %>
+
+
+<% else %>
+<p>Streaming from <%= @event.city %>, <%= @event.country %></p>
+<p>Online Show: <%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
+<p style="color:gray">Please note: this event will be live streamed globally. Please take note of the time zone above.</p>
+ <%= form_tag payment_path do %>
     <%= hidden_field_tag 'event_id', @event.id %>
     <%= submit_tag 'Buy Ticket', class: 'btn btn-primary' %>
     <% end %>
- <% end %>
+<% end %>
+</br>
+  <%# <% if Order.where(event: @event, state: 'paid', user: current_user).any? %> 
+    <%# <%= link_to "Go to stream", room_path(@event.room), class: 'btn btn-primary' %> 
+    <%# <% elsif @event.user == current_user %> 
+    <%# <%= link_to "Start Stream", room_path(@event.room), class: 'btn btn-primary' %> 
+    <%# <% elsif @event.funding.present? %>
+    <%# <%= form_tag deposit_path do %> 
+    <%# <%= text_field_tag(:amount) %> 
+    <%# <%= hidden_field_tag 'event_id', @event.id %> 
+    <%# <%= submit_tag 'Donate', class: 'btn btn-primary' %>
+    <%# <% end %> 
+    <%# <% else %> 
+  
+ <%# <% end %>
+
+
+ <%# <%= form_with url: donate_amount_path do |form| %> 
+  <%# <%= form.label :test, "Amount" %> 
+  <%# <%= form.text_field :amount %>
+  <%# <%= hidden_field_tag 'event_id', @event.id %> 
+  <%# <%= form.submit "Donate" %> 
+<%# <% end %> 
 </div>
 
-    <div class="col-xl-3 col-lg-6 mb-4">
+    <%# <div class="col-xl-3 col-lg-6 mb-4">
       <div class="rounded-lg p-5">
-        <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
+        <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2> %>
 
         <!-- Progress bar 1 -->
-        <div class="progress mx-auto" data-value='<%= @percent_bar %>'>
-          <span class="progress-left">
+        <%# <div class="progress mx-auto" data-value='<%= @percent_bar %>
+          <%# <span class="progress-left">
                         <span class="progress-bar border-primary"></span>
           </span>
-          <span class="progress-right">
-                        <span class="progress-bar border-primary"></span>
+          <span class="progress-right"> %>
+                        <%# <span class="progress-bar border-primary"></span>
           </span>
           <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-            <div class="h2 font-weight-bold"><%= @percent_text %><sup class="small">%</sup></div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="h2 font-weight-bold"><%= @percent_text %>
+            <%# <sup class="small">%</sup></div>
+          </div> %> 
+        <%# </div> %>
+      <%# </div> %>
+    <%# </div> %>
 
 </div>
 </div>
+
+<!-- Modal -->
+<div class="event-modal">
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pick your ticket type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <ul>
+      <li>Live (in person) ticket <p><%= @event.currency%> <%= Money.new(@event.price_live.to_s, :gbp) %></p>
+       <%= form_tag paymentlive_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Live Show Ticket', class: 'btn btn-primary' %>
+    <% end %>
+        </li>
+
+       <li>Online (live stream) ticket <p><%= @event.currency%> <%= Money.new(@event.price_cents.to_s, :gbp) %></p>
+             <%= form_tag payment_path do %>
+    <%= hidden_field_tag 'event_id', @event.id %>
+    <%= submit_tag 'Buy Live Stream Ticket', class: 'btn btn-primary' %>
+    <% end %>
+        </li> 
+        </ul>
+      </div>
+      <div class="modal-footer">
+      
+         
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container">

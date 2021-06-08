@@ -2,11 +2,11 @@
 <div class="col-lg-4  justify-content-between">
 <div class="footer-logo">
 <div class="footer-copyright">
-    <p><%= image_tag "https://res.cloudinary.com/ddqpdj02o/image/upload/v1614705819/Stand_Up_Comedy_10_j2mygu.png" %> Front<strong>Row</strong> 2021</p>
+    <p><%= image_tag "https://res.cloudinary.com/ddqpdj02o/image/upload/v1619553934/FR_Logos_1_vugaiq.png" %></p>
   </div>
   <div class="footer-links">
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/frontrowgigs/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
     <a href="#"><i class="fab fa-spotify"></i></a>
   </div>
   </div>
@@ -16,18 +16,30 @@
 
 <div class="col-lg-2 col-md-3 col-sm-6">
 <h6>Learn More</h6>
-<a href="/about">About</a>
+<ul>
+<li><a href="/about">About</a></li>
+<li><a href="/how">How it works</a></li>
+<li><a href="/faqs">FAQS</a></li>
+<li><a href="/terms-conditions">T&Cs</a></li>
+</ul>
 </div>
 
 <div class="col-lg-2 col-md-3 col-sm-6">
 <h6>Discover</h6>
-<a href="https://www.youtube.com/watch?v=oytKUmF01Uo">About</a>
+<a href="/about">Blog</a>
 </div>
 
 <div class="col-lg-2 col-md-3 col-sm-6">
 <h6>Get Involved</h6>
-<a href="https://www.youtube.com/watch?v=oytKUmF01Uo">About</a>
+<ul>
+<li><%= link_to "Apply As Artist", applyartist_path %></li>
+<li><%= link_to "Apply As Venue", applyvenue_path %></li>
+<li><a href="/contact">Contact Us</a></li>
+</ul>
 </div>
-
+<%# <span> %>
+<%# <p> © <%= Date.today.year %> 
+<%# FrontRow</p> %> 
+<%# </span> %>
 
 </div>

@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     end
     @search = params[:search]
     @query = params[:query] || params[:city] || params[:country]
-      # @events = Event.all
+    @artists = User.where(artist: true)
   end
 
   # NEW
@@ -25,18 +25,19 @@ class EventsController < ApplicationController
   # SHOW
   def show
     @event = Event.find(params[:id])
+    @amount = params[:amount]
 
     # User IP tracker - switched off due to certificate error
     # UserVisit.visit(request.remote_ip, Event.find(params[:id]), "show")
 
-    @funding = @event.funding
-    @sales = Order.where(event_id: @event).count
-    @percent_text = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
-    if @sales >= @funding
-      @percent_bar = 100
-    else
-      @percent_bar = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
-    end
+    # @funding = @event.funding
+    # @sales = Order.where(event_id: @event).count
+    # @percent_text = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    # if @sales >= @funding
+    #   @percent_bar = 100
+    # else
+    #   @percent_bar = (( @sales.to_f / @funding.to_f) * 100).to_d(3)
+    # end
   end
 
   # CREATE
@@ -45,6 +46,12 @@ class EventsController < ApplicationController
     @event_genre = params[:event][:genre_ids].reject(&:blank?)
     @event.user = current_user
     @event.price_cents = @event.price_cents * 100
+    @event.price_live  = @event.price_live * 100
+
+    if params[:online].blank?
+    flash[:notice] = "No performance type selected"
+    end
+
     if @event.save
       @event_genre.each do |genre|
         EventGenre.create!(
@@ -87,6 +94,12 @@ class EventsController < ApplicationController
       @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
       @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
       # elsif params[:query].empty?
+      @sorted_countries = []
+      @city_event = @events.each do |event|
+        sorted = event.searchable
+        @sorted_countries << sorted
+      end
+      @unique_countries = @sorted_countries.uniq(&:country)
       #   alert()
     else
       @events = Event.all
@@ -96,11 +109,51 @@ class EventsController < ApplicationController
     end
   end
 
+    def nearme
+
+      if params[:query].present? 
+      # @events = Event.where("event_name ILIKE ?", "%#{params[:query]}%")
+      @artists = PgSearch.multisearch(params[:query]).where(searchable_type: 'User')
+      @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
+      @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
+      # elsif params[:query].empty?
+      #   alert()
+    else
+      @events = Event.all
+    end
+    @search = params[:search]
+    @query = params[:query] || params[:city] || params[:country]
+
+    end
+
+    def searchcity
+
+      if params[:query].present?
+      # @events = Event.where("event_name ILIKE ?", "%#{params[:query]}%")
+      @artists = PgSearch.multisearch(params[:query]).where(searchable_type: 'User')
+      @events = PgSearch.multisearch(params[:query]).where(searchable_type: 'Event')
+      @genres = PgSearch.multisearch(params[:query]).where(searchable_type: 'Genre')
+      # elsif params[:query].empty?
+      #   alert()
+    else
+      @events = Event.all
+    end
+    @search = params[:search]
+    @query = params[:query] || params[:city] || params[:country]
+
+    end
+
+    def country_name
+      country = ISO3166::Country[country_code]
+      country.translations[I18n.locale.to_s] || country.name
+    end
+
   private
 
   # PARAMS
 
   def event_params
-    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding)
+    params.require(:event).permit(:event_name, :description, :price_cents, :start_time, :end_time, :city, :country, :photo, :funding, :online, :in_person, :amount, :currency, :time_zone, :address, :price_live)
   end
-end
+  
+  end

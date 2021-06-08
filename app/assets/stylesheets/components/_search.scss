@@ -23,7 +23,7 @@
 #form-field {
   border: none;
   background-color: black;
-  width: 700px;
+  width: 900px;
   color: gray;
   font-size: 50px;
   padding-left: 20px;
@@ -84,4 +84,22 @@
   border-bottom: solid 1px rgb(44, 44, 44);
   width: 200px;
   padding-bottom: 10px;
+}
+
+.form-city {
+  display: flex;
+  flex-direction: column;
+}
+
+#form-city {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.651);
+  color: #672af9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  padding: 5px;
+  width: 500px;
+  font-size: 40px;
+  padding-left: 20px;
 }

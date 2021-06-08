@@ -10,16 +10,16 @@
       <%= simple_form_for (@event) do |f| %>
         <%= f.input :event_name, input_html: { class: "nice-class", maxlength: 50 } %>
         <%= f.label :Description %>
-        <%= f.rich_text_area :description, input_html: { maxlength: 150 } %>
+        <%= f.rich_text_area :description, input_html: { maxlength: 600 } %>
         <%= f.input :start_time, as: :string, required: true, input_html: {class: "datepicker"} %>
         <%= f.input :end_time, as: :string, required: true, input_html: {class: "datepicker"} %>
         <%= f.input :city %>
         <%= f.country_select :country, priority_countries: ["GB", "US"] %>
         <%= f.input :price_cents, label: "Price per Ticket" %>
-        <%= f.input :funding, label: "Crowd Funding Target" %>
+        <%# <%= f.input :funding, label: "Crowd Funding Target" %> %>
         <%= f.association :genres, multiple: true, size: 3 %>
         <%= f.input :photo, as: :file %>
-        <%= f.submit 'Add your Event', class: 'btn btn-primary' %>
+        <%= f.submit 'Update your Event', class: 'btn btn-primary' %>
       <% end %>
     </div>
   </div>
