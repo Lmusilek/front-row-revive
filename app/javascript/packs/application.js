@@ -64,12 +64,14 @@ document.addEventListener("turbolinks:load", () => {
   }
   initChatroomCable();
 
+
   $("#form-field").on("keypress", (e) => {
     if (e.keyCode == 13) {
       return false;
     }
   });
   
+
   // Flatpickr
   initFlatpickr();
 

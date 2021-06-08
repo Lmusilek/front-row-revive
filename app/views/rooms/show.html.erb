@@ -1,7 +1,18 @@
 <div class="d-flex justify-content-between">
     <div class="col-8 ml-3">
-        <% @room.event.user == current_user %>
-        <iframe width="960" height="600" src="https://www.youtube.com/embed/0s8lfB_p1JI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+ 
+        <% if @room.event.user == current_user %>
+
+        <p id="live-button">LIVE NOW</p>
+        <div id="videos" data-controller="vonage" data-vonage-api-key="<%= ENV["VONAGE_API_KEY"] %>" data-vonage-session-id="<%= @room.vonage_session_id %>" data-vonage-token="<%= @token %>" data-vonage-name="<%= current_user.first_name %>">
+
+        </div>
+        <% elsif %>
+        <p id="live-button">LIVE NOW</p>
+        <div id="videos" data-controller="vonageVisitor" data-vonageVisitor-api-key="<%= ENV["VONAGE_API_KEY"] %>" data-vonageVisitor-session-id="<%= @room.vonage_session_id %>" data-vonageVisitor-token="<%= @token %>" data-vonageVisitor-name="<%= current_user.first_name %>">
+        </div>
+        <% end %>
     </div>
 
     <!-------- LIVE CHAT ------->
@@ -27,5 +38,7 @@
             <%= f.input :content, label: false, placeholder: "Type your Message here#{@room.chatroom.name}", input_html: { id: "livechat-input" } %>
             <% end %>
         </div>
+
+        <input id="volume-control" type="range" min="1" max="100" value="50">
+
     </div>
-</div>
