@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 2021_05_25_112907) do
     t.integer "price_cents", default: 0, null: false
     t.string "sku"
     t.integer "funding"
-    t.string "currency"
     t.boolean "online"
     t.boolean "in_person"
+    t.string "currency"
     t.string "time_zone", limit: 255, default: "UTC"
     t.string "address"
     t.integer "price_live"

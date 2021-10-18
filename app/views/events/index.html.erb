@@ -81,8 +81,8 @@
   <div class="container">
   <h4>Global Upcoming Events</h4>
 <div class="row">
-<%# <% @events.each do |event| %> 
-      <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
+<% @events.each do |event| %> 
+      <%# <% @events.where("start_time > ?", Date.today).sort_by{|p| p[:start_time]}.first(9).each do |event| %>
       
   <div class="example-1 card">
   <% if event.photo.attached? %>
